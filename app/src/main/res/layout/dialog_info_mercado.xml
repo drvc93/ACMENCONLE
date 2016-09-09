@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/scrollView2"
+            android:fillViewport="false">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="El Mercado Mayorista del Cono Norte (ACMENCONLE) está llamado a ser el punto de mayor referencia comercial en el rubro de alimentos en la ciudad de Trujillo. Su moderna infraestructura ofrecerá a la colectividad los mejores productos de pan llevar en un ambiente moderno, limpio y con todas las medidas de seguridad. Asimismo, será un gran centro de acopio y formación de precios agrícolas en la ciudad y el norte del país. "
+                android:id="@+id/textView4"
+                android:layout_margin="15dp"
+                android:textAlignment="center"
+                android:textSize="18dp" />
+        </ScrollView>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            android:id="@+id/btnOK"
+            android:textStyle="bold"
+            android:background="#aae1e1e1" />
+
+    </LinearLayout>
+
+</LinearLayout>

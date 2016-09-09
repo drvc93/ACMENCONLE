@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imgHome"
-            android:src="@drawable/icn_mercado_48"
+            android:src="@drawable/icn_home_64"
 
             android:layout_marginRight="30dp" />
 
@@ -79,15 +79,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imgUbicacion"
-            android:src="@drawable/icn_gps_48"
+            android:src="@drawable/icn_gps_64"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView4"
-            android:src="@drawable/icn_clients_48"
+            android:id="@+id/imgSocios"
+            android:src="@drawable/icn_clients_64"
             android:layout_marginLeft="30dp" />
     </LinearLayout>
 

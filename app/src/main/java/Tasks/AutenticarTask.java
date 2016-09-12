@@ -11,6 +11,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import java.util.ArrayList;
 
 import Model.Usuario;
+import Utils.Constantes;
 
 /**
  * Created by drvc_ on 10/09/2016.
@@ -20,8 +21,8 @@ public class AutenticarTask extends AsyncTask<String,String,ArrayList<Usuario>> 
     protected ArrayList<Usuario> doInBackground(String... strings) {
      ArrayList<Usuario> result = new ArrayList<Usuario>();
        // String urlserver = params[1];
-        final String NAMESPACE = "http://drvc2110-001-site2.btempurl.com/";
-        final String URL=NAMESPACE+"ACWebService.asmx";
+        final String NAMESPACE = Constantes.UrlWS;
+        final String URL=NAMESPACE+Constantes.NameSpaceWS;
         final String METHOD_NAME = "GetUsuario";
         final String SOAP_ACTION = NAMESPACE+METHOD_NAME;
         SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);

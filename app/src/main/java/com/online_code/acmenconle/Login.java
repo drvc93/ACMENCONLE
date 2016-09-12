@@ -1,7 +1,10 @@
 package com.online_code.acmenconle;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.EditTextPreference;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,6 +29,8 @@ public class Login extends AppCompatActivity {
 
     EditText txtUser , txtPass;
     Button  btnEntrar ;
+    SharedPreferences preferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,7 @@ public class Login extends AppCompatActivity {
         txtUser =  (EditText) findViewById(R.id.txtUserName);
         txtPass  =(EditText) findViewById(R.id.txtPass);
         btnEntrar = (Button) findViewById(R.id.btnLogin);
+        preferences = PreferenceManager.getDefaultSharedPreferences(Login.this);
         //ds
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +79,15 @@ public class Login extends AppCompatActivity {
         lstUser = (ArrayList<Usuario>) asyncTaskUsuarios.get();
         if (lstUser!= null && lstUser.size() >0){
             Usuario  user =  lstUser.get(0);
-            CreateCustomToast("Bienvenido " + user.getNombres(), Constantes.icon_succes,Constantes.layout_success);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("UserDni", user.getDni());
+            editor.putString("TipoUser",user.getTipoUsuario());
+            editor.putString("CodSocio",user.getCodigo());
+            editor.putString("UserName",user.getNombres());
+            editor.commit();
+            Intent intent = new Intent(Login.this , MenuPrincipal.class);
+            startActivity(intent);
+           // CreateCustomToast("Bienvenido " + user.getNombres(), Constantes.icon_succes,Constantes.layout_success);
 
         }
 

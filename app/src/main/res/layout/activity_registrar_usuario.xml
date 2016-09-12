@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/blue_clear_bg">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView5" >
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nro. DNI:"
+                        android:id="@+id/textView8"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="#0c0c0c"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:id="@+id/txtDniUs"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/edittext_style"
+                        android:padding="8dp"
+                        android:hint="Escribir DNI"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nombres"
+                        android:id="@+id/textView5"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="#0c0c0c"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/txtNombreUs"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/edittext_style"
+                        android:padding="8dp"
+                        android:hint="Escribir nombre" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Apell. Paterno"
+                        android:id="@+id/textView6"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="#0c0c0c"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/txtApePatUs"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/edittext_style"
+                        android:padding="8dp"
+                        android:hint="Escribir apellido paterno" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Apell. Materno"
+                        android:id="@+id/textView7"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="#0c0c0c"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/txtApeMatUs"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/edittext_style"
+                        android:padding="8dp"
+                        android:hint="Escribir apellido materno" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text=" Puesto:"
+                        android:id="@+id/textView9"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="#0c0c0c"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:id="@+id/txtPuestoUs"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/edittext_style"
+                        android:padding="8dp"
+                        android:hint="Escribir nro de puesto"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Celular:"
+                        android:id="@+id/textView10"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="#0c0c0c"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:id="@+id/txtCelUs"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/edittext_style"
+                        android:padding="8dp"
+                        android:hint="Escribir celular"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Tipo Us.:"
+                        android:id="@+id/textView11"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="#0c0c0c"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spTipoUser"
+                        android:background="@drawable/spiner_style"
+                        android:spinnerMode="dialog" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/buttonBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        style="@android:style/ButtonBar"
+        android:gravity="center"
+        android:background="#951668a4"
+        android:orientation="vertical">
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="GUARDAR"
+            android:id="@+id/btnLogin"
+            android:background="#00ffffff"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+</RelativeLayout>

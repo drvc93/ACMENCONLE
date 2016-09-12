@@ -25,7 +25,11 @@
         </activity>
         <activity android:name=".Ubicacion" />
         <activity android:name=".InfoMercado" />
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Login" />
+        <activity android:name=".MenuPrincipal" />
+        <activity android:name=".MenuModUsuarios" />
+        <activity android:name=".RegistrarUsuario" />
+        <activity android:name=".ListarUsuarios"></activity>
     </application>
 
 </manifest>

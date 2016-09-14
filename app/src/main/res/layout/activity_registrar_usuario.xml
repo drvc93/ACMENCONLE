@@ -215,6 +215,34 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Correo"
+                        android:id="@+id/textView12"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="#0c0c0c"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:id="@+id/txtCorreoUs"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/edittext_style"
+                        android:padding="8dp"
+                        android:hint="Escribir correo.."
+                        android:inputType="number" />
+                </LinearLayout>
+
             </LinearLayout>
 
         </FrameLayout>
@@ -227,17 +255,19 @@
         android:layout_alignParentBottom="true"
         style="@android:style/ButtonBar"
         android:gravity="center"
-        android:background="#951668a4"
+        android:background="@color/colorPrimary"
         android:orientation="vertical">
 
 
         <Button
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="GUARDAR"
-            android:id="@+id/btnLogin"
-            android:background="#00ffffff"
-            android:textSize="18dp" />
+            android:text="Siguiente"
+            android:id="@+id/btnSigRegUs"
+            android:background="@color/colorPrimary"
+            android:textSize="18dp"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </RelativeLayout>

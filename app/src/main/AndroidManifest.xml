@@ -29,7 +29,8 @@
         <activity android:name=".MenuPrincipal" />
         <activity android:name=".MenuModUsuarios" />
         <activity android:name=".RegistrarUsuario" />
-        <activity android:name=".ListarUsuarios"></activity>
+        <activity android:name=".ListarUsuarios" />
+        <activity android:name=".SelecSeccion"></activity>
     </application>
 
 </manifest>

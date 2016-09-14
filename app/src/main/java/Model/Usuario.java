@@ -14,11 +14,10 @@ public class Usuario {
     private  String celular;
     private  String fechaRegistro;
     private  String tipoUsuario ;
+    private  String estado;
+    private  String correo;
 
-    public Usuario() {
-    }
-
-    public Usuario(String codigo, String dni, String nombres, String apellidoPat, String apellidoMat, String puesto, String celular, String fechaRegistro, String tipoUsuario) {
+    public Usuario(String codigo, String dni, String nombres, String apellidoPat, String apellidoMat, String puesto, String celular, String fechaRegistro, String tipoUsuario, String estado, String correo) {
         this.codigo = codigo;
         this.dni = dni;
         this.nombres = nombres;
@@ -28,6 +27,27 @@ public class Usuario {
         this.celular = celular;
         this.fechaRegistro = fechaRegistro;
         this.tipoUsuario = tipoUsuario;
+        this.estado = estado;
+        this.correo = correo;
+    }
+
+    public Usuario() {
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getCodigo() {

@@ -3,6 +3,9 @@ package com.online_code.acmenconle;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -18,10 +21,12 @@ public class ListarUsuarios extends AppCompatActivity {
     ListView lvUsuarios ;
     EditText txtSearch ;
     ArrayList<String> listNombres;
+    public  ArrayAdapter<String> adapterLV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_usuarios);
+        setTitle("Lista  de socios y usuarios");
         lvUsuarios = (ListView) findViewById(R.id.LVUsuario);
         txtSearch = (EditText) findViewById(R.id.txtSearchUser);
         listNombres = new ArrayList<String>();
@@ -41,7 +46,7 @@ public class ListarUsuarios extends AppCompatActivity {
 
                 for (int i = 0; i <listaUsuarios.size() ; i++) {
                     Usuario us = listaUsuarios.get(i);
-                    listNombres.add(us.getNombres() +" " + us.getApellidoPat() + " " + us.getApellidoMat());
+                    listNombres.add(us.getDni() + " - "+us.getNombres() +" " + us.getApellidoPat() + " " + us.getApellidoMat());
 
                 }
                 setAdapterListView(listNombres);
@@ -57,8 +62,33 @@ public class ListarUsuarios extends AppCompatActivity {
 
     public  void  setAdapterListView(ArrayList<String> listString){
 
-        ArrayAdapter<String> adapterLV = new ArrayAdapter<String>(ListarUsuarios.this,android.R.layout.simple_list_item_1,listString);
+         adapterLV = new ArrayAdapter<String>(ListarUsuarios.this,android.R.layout.simple_list_item_1,listString);
         lvUsuarios.setAdapter(adapterLV);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_lista_usuarios, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.Buscar) {
+
+            FilterList();
+        }
+
+        return true;
+    }
+
+    public  void  FilterList (){
+
+
+        ListarUsuarios.this.adapterLV.getFilter().filter(txtSearch.getText().toString());
     }
 }

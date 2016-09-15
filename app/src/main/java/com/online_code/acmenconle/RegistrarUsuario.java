@@ -6,7 +6,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -29,12 +31,19 @@ public class RegistrarUsuario extends AppCompatActivity {
     ActionBar actionBarGlobal;
     ActionBar actionBar;
     Button btnSiguiente ;
+    LinearLayout butonBar;
 
     String TipoReg ;
+
+    private String TAG = RegistrarUsuario.class.getSimpleName();
+    float initialX, initialY;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_usuario);
+        butonBar = (LinearLayout)findViewById(R.id.buttonBarRegUs);
+        butonBar.setVisibility(View.INVISIBLE);
         TipoReg =  getIntent().getExtras().getString("TipoReg");
         txtDNI = (EditText)findViewById(R.id.txtDniUs);
         txtNombres = (EditText)findViewById(R.id.txtNombreUs);
@@ -98,6 +107,26 @@ public class RegistrarUsuario extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //mGestureDetector.onTouchEvent(event);
+
+        View v = getCurrentFocus();
+        boolean ret = super.dispatchTouchEvent(event);
+        return  true;
+    }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+           // butonBar.setVisibility(View.VISIBLE);
+            //set immersive mode here, or whatever...
+        }
+        else  if (event.getAction() == MotionEvent.ACTION_UP) {
+            butonBar.setVisibility(View.VISIBLE);
+            HideButonBar();
+        }
+        return super.dispatchTouchEvent(event);
+    }
 
     public void   LoadSpinerTipoUsuario (){
 
@@ -124,6 +153,23 @@ public class RegistrarUsuario extends AppCompatActivity {
             @Override
             public void onFinish() {
                 actionBarGlobal.hide();
+                //  getWindow().setStatusBarColor(Color.parseColor("#fc0101"));
+            }
+        }.start();
+
+    }
+
+    public void HideButonBar() {
+
+        new CountDownTimer(3000, 1000) {
+            @Override
+            public void onTick(long l) {
+                //      Toast.makeText(context,String.valueOf(l),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFinish() {
+               butonBar.setVisibility(View.INVISIBLE);
                 //  getWindow().setStatusBarColor(Color.parseColor("#fc0101"));
             }
         }.start();

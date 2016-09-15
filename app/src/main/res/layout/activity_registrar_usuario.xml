@@ -6,9 +6,11 @@
     android:background="@drawable/blue_clear_bg">
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView5" >
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView5"
+
+        >
 
         <FrameLayout
             android:layout_width="fill_parent"
@@ -240,7 +242,7 @@
                         android:background="@drawable/edittext_style"
                         android:padding="8dp"
                         android:hint="Escribir correo.."
-                        android:inputType="number" />
+                        android:inputType="textEmailAddress" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -249,7 +251,7 @@
     </ScrollView>
 
     <LinearLayout
-        android:id="@+id/buttonBar"
+        android:id="@+id/buttonBarRegUs"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

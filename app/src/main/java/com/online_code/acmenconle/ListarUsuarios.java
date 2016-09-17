@@ -1,11 +1,14 @@
 package com.online_code.acmenconle;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -31,6 +34,19 @@ public class ListarUsuarios extends AppCompatActivity {
         txtSearch = (EditText) findViewById(R.id.txtSearchUser);
         listNombres = new ArrayList<String>();
         LoadUsersLIstView();
+
+        lvUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String  getdni  = lvUsuarios.getItemAtPosition(i).toString();
+                getdni = getdni.substring(0,8);
+                getdni = getdni.trim();
+                Intent  intent = new Intent(ListarUsuarios.this,RegistrarUsuario.class);
+                intent.putExtra("DNI",getdni);
+                intent.putExtra("TipoReg","EDIT");
+                startActivity(intent);
+            }
+        });
     }
 
     public void   LoadUsersLIstView  (){

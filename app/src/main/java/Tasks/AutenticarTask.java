@@ -51,9 +51,10 @@ public class AutenticarTask extends AsyncTask<String,String,ArrayList<Usuario>> 
                 us.setApellidoMat(ic.getProperty(4).toString());
                 us.setPuesto(ic.getProperty(5).toString());
                 us.setCelular(ic.getProperty(6).toString());
+                us.setTipoUsuario(ic.getProperty(8).toString());
                 us.setFechaRegistro(ic.getProperty(7).toString());
-                us.setEstado(ic.getProperty(8).toString());
-                us.setCorreo(ic.getProperty(9).toString());
+                us.setEstado(ic.getProperty(9).toString());
+                us.setCorreo(ic.getProperty(10).toString());
 
                 result.add(us);
 

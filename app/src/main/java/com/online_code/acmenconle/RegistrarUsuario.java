@@ -1,6 +1,7 @@
 package com.online_code.acmenconle;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
+import Model.Usuario;
+import Tasks.AutenticarTask;
 import Utils.Constantes;
 
 public class RegistrarUsuario extends AppCompatActivity {
@@ -33,7 +37,7 @@ public class RegistrarUsuario extends AppCompatActivity {
     Button btnSiguiente ;
     LinearLayout butonBar;
 
-    String TipoReg ;
+    String TipoReg, dni ;
 
     private String TAG = RegistrarUsuario.class.getSimpleName();
     float initialX, initialY;
@@ -68,6 +72,8 @@ public class RegistrarUsuario extends AppCompatActivity {
         }
         else {
             setTitle("Modificar Usuario");
+            dni = getIntent().getExtras().getString("DNI");
+            CargarDatosSocio(dni);
         }
 
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
@@ -220,6 +226,40 @@ public class RegistrarUsuario extends AppCompatActivity {
         }
 
         return  res;
+    }
+
+
+    public  void  CargarDatosSocio (String DNI){
+        ArrayList<Usuario>   listUser = null;
+        Usuario  us ;
+        AutenticarTask  getUser = new AutenticarTask() ;
+        AsyncTask<String,String,ArrayList<Usuario>>  asyncTaskSocio ;
+
+        try {
+            asyncTaskSocio =  getUser.execute("3", DNI, "");
+            listUser = asyncTaskSocio.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        if (listUser != null && listUser.size()>0){
+            us = listUser.get(0);
+            txtDNI.setText(us.getDni());
+            txtNombres.setText(us.getNombres());
+            txtApellidoPat.setText(us.getApellidoPat());
+            txtApeMat.setText(us.getApellidoMat());
+            txtPuesto.setText(us.getPuesto());
+            txtCelular.setText(us.getCelular());
+            txtCorreo.setText(us.getCorreo());
+           if (us.getTipoUsuario().equals("ADM")){
+              spTipoUser.setSelection(2);
+           }
+           else {
+                spTipoUser.setSelection(1);
+           }
+        }
     }
 
     public void CreateCustomToast(String msj, int icon, int backgroundLayout) {

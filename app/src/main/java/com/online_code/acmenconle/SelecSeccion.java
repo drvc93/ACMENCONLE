@@ -32,7 +32,7 @@ import Utils.Constantes;
 public class SelecSeccion extends AppCompatActivity {
 
     String TipoReg,DNI,Nombres,ApePat,ApeMat,Puesto,Celular,TipoUsuario,Correo,UserReg;
-
+    String codSocio ="";
     ArrayList<Seccion> listSeccion ;
     ListView lvSeccion ;
     Button  btnRegistrarUsuario ;
@@ -40,6 +40,8 @@ public class SelecSeccion extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selec_seccion);
         setTitle("Seleccionar secciones :");
@@ -57,6 +59,12 @@ public class SelecSeccion extends AppCompatActivity {
         TipoUsuario = getIntent().getStringExtra("tipoUs");
         TipoUsuario = TipoUsuario.substring(0,3);
         Correo = getIntent().getStringExtra("correo");
+
+        if (TipoReg.equals("EDIT" )){
+
+
+        }
+
 
         LoadListView();
 

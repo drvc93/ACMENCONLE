@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,13 +61,16 @@ public class SelecSeccion extends AppCompatActivity {
         TipoUsuario = TipoUsuario.substring(0,3);
         Correo = getIntent().getStringExtra("correo");
 
-        if (TipoReg.equals("EDIT" )){
 
-
-        }
 
 
         LoadListView();
+        if (TipoReg.equals("EDIT" )){
+
+            codSocio = getIntent().getStringExtra("codSocio");
+            SetChekedItemsListView();
+
+        }
 
         btnRegistrarUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +87,7 @@ public class SelecSeccion extends AppCompatActivity {
 
 
         try {
-            listAsyncTask = getSeccionesTask.execute("1","");
+            listAsyncTask = getSeccionesTask.execute("1","0","0");
             listSeccion = listAsyncTask.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -124,7 +128,7 @@ public class SelecSeccion extends AppCompatActivity {
         int cont = 0;
 
         try {
-            asyncTaskRegSocio = registrarSocioTask.execute(TipoReg,"",DNI,Nombres,ApePat,ApeMat,Puesto,Celular,TipoUsuario,UserReg,Correo);
+            asyncTaskRegSocio = registrarSocioTask.execute(TipoReg,codSocio,DNI,Nombres,ApePat,ApeMat,Puesto,Celular,TipoUsuario,UserReg,Correo);
             resultRegSocio = (String)asyncTaskRegSocio.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -164,8 +168,14 @@ public class SelecSeccion extends AppCompatActivity {
 
         }
 
-        if (cont>0){
-            CreateCustomToast("Se registro correctamente ", Constantes.icon_succes,Constantes.layout_success);
+        if (cont>0 || TipoReg.equals("EDIT")){
+              String msj  = "Se registro correctamente" ;
+
+            if (TipoReg.equals("EDIT")){
+
+                msj = "Se actualizo correctamente los datos.";
+            }
+            CreateCustomToast(msj, Constantes.icon_succes,Constantes.layout_success);
             Intent iintent = new Intent(SelecSeccion.this,MenuPrincipal.class);
             startActivity(iintent);
         }
@@ -224,4 +234,37 @@ public class SelecSeccion extends AppCompatActivity {
 
 
     }
+
+     public  void  SetChekedItemsListView (){
+         ArrayList<Seccion> listSeccionChecked  = null;
+         AsyncTask<String,String,ArrayList<Seccion>> asyncTaskgetSeccionItems ;
+         GetSeccionesTask getSeccionesTaskItems =  new GetSeccionesTask() ;
+
+
+         try {
+             Log.i("cod socio" , codSocio);
+             asyncTaskgetSeccionItems = getSeccionesTaskItems.execute("2","0",codSocio);
+             listSeccionChecked = asyncTaskgetSeccionItems.get();
+         } catch (InterruptedException e) {
+             e.printStackTrace();
+         } catch (ExecutionException e) {
+             e.printStackTrace();
+         }
+
+          if (listSeccionChecked!=null && listSeccionChecked.size()>0) {
+              for (int i = 0; i < listSeccion.size() ; i++) {
+                  String codItem = listSeccion.get(i).getCodigo();
+                  for(  int j = 0 ; j <listSeccionChecked.size() ; j++ ){
+
+                      if (codItem.equals(listSeccionChecked.get(j).getCodigo())){
+
+                          lvSeccion.setItemChecked(i,true);
+                      }
+                  }
+              }
+
+          }
+
+
+     }
 }

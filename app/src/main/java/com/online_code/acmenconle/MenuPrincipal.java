@@ -26,7 +26,7 @@ public class MenuPrincipal extends AppCompatActivity {
         setContentView(R.layout.activity_menu_principal);
         setTitle("Menú Principal");
         btnModUsuarios = (Button)findViewById(R.id.btnModUsuarios);
-
+        btnModPagos = (Button) findViewById(R.id.btnModPagos);
 
 
         preferences = PreferenceManager.getDefaultSharedPreferences(MenuPrincipal.this);
@@ -41,6 +41,14 @@ public class MenuPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent  intent = new Intent(MenuPrincipal.this , MenuModUsuarios.class);
+                startActivity(intent);
+            }
+        });
+
+        btnModPagos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuPrincipal.this,MenuModPago.class);
                 startActivity(intent);
             }
         });

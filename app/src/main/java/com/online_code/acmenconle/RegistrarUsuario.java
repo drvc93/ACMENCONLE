@@ -38,6 +38,7 @@ public class RegistrarUsuario extends AppCompatActivity {
     LinearLayout butonBar;
 
     String TipoReg, dni ;
+    String codSocio ;
 
     private String TAG = RegistrarUsuario.class.getSimpleName();
     float initialX, initialY;
@@ -104,6 +105,10 @@ public class RegistrarUsuario extends AppCompatActivity {
                     intent.putExtra("celular" ,txtCelular.getText().toString());
                     intent.putExtra("tipoUs",spTipoUser.getSelectedItem().toString());
                     intent.putExtra("correo",txtCorreo.getText().toString());
+                    if (TipoReg.equals("EDIT")){
+                        intent.putExtra("codSocio", codSocio);
+                    }
+
 
                     startActivity(intent);
                 }
@@ -253,6 +258,7 @@ public class RegistrarUsuario extends AppCompatActivity {
             txtPuesto.setText(us.getPuesto());
             txtCelular.setText(us.getCelular());
             txtCorreo.setText(us.getCorreo());
+             codSocio = us.getCodigo();
            if (us.getTipoUsuario().equals("ADM")){
               spTipoUser.setSelection(2);
            }

@@ -40,7 +40,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="INGRESAR"
+            android:text="FINALIZAR"
             android:id="@+id/btnRegUsuario"
             android:background="#00ffffff"
             android:textSize="18dp"

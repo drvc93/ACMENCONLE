@@ -22,7 +22,7 @@ public class GetSeccionesTask extends AsyncTask<String,String ,ArrayList<Seccion
     @Override
     protected ArrayList<Seccion> doInBackground(String... strings) {
         ArrayList<Seccion> result = new ArrayList<Seccion>();
-        // String urlserver = params[1];
+
         final String NAMESPACE = Constantes.UrlWS;
         final String URL=NAMESPACE+Constantes.NameSpaceWS;
         final String METHOD_NAME = "GetSecciones";
@@ -30,6 +30,7 @@ public class GetSeccionesTask extends AsyncTask<String,String ,ArrayList<Seccion
         SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
         request.addProperty("accion", strings[0]);
         request.addProperty("codSeccion", strings[1]);
+        request.addProperty("codSocio", strings[2]);
 
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         envelope.dotNet = true;

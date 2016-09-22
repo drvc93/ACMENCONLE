@@ -25,19 +25,19 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import Model.Seccion;
+import Model.SocioPuesto;
 import Tasks.GetSeccionesTask;
+import Tasks.GetSocioPuestoTask;
 import Tasks.RegistrarSocioSeccionTask;
 import Tasks.RegistrarSocioTask;
 import Utils.Constantes;
+import Utils.PuestoSeccionAdapater;
 
 public class SelecSeccion extends AppCompatActivity {
 
-    String TipoReg,DNI,Nombres,ApePat,ApeMat,Puesto,Celular,TipoUsuario,Correo,UserReg;
-    String codSocio ="";
-    ArrayList<Seccion> listSeccion ;
-    ListView lvSeccion ;
-    Button  btnRegistrarUsuario ;
-    SharedPreferences preferences;
+
+
+    ListView lvSocioPuesto ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,147 +45,47 @@ public class SelecSeccion extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selec_seccion);
-        setTitle("Seleccionar secciones :");
-        preferences = PreferenceManager.getDefaultSharedPreferences(SelecSeccion.this);
-        btnRegistrarUsuario =(Button) findViewById(R.id.btnRegUsuario);
-        UserReg = preferences.getString("UserDni",null);
-        lvSeccion = (ListView)findViewById(R.id.LVSecciones);
-        TipoReg = getIntent().getStringExtra("TipoReg");
-        DNI =  getIntent().getStringExtra("dni");
-        Nombres =  getIntent().getStringExtra("nombre");
-        ApePat =  getIntent().getStringExtra("apePat");
-        ApeMat = getIntent().getStringExtra("apeMat");
-        Puesto = getIntent().getStringExtra("puesto");
-        Celular  = getIntent().getStringExtra("celular");
-        TipoUsuario = getIntent().getStringExtra("tipoUs");
-        TipoUsuario = TipoUsuario.substring(0,3);
-        Correo = getIntent().getStringExtra("correo");
+        lvSocioPuesto = (ListView) findViewById(R.id.LVSecciones);
 
 
+        LoadListview("1");
 
 
-        LoadListView();
-        if (TipoReg.equals("EDIT" )){
-
-            codSocio = getIntent().getStringExtra("codSocio");
-            SetChekedItemsListView();
-
-        }
-
-        btnRegistrarUsuario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlerSave();
-            }
-        });
 
     }
 
-    public  void LoadListView (){
-        AsyncTask<String,String,ArrayList<Seccion>> listAsyncTask;
-        GetSeccionesTask getSeccionesTask = new GetSeccionesTask();
+
+    public  void  LoadListview (String codSocio){
 
 
+        ArrayList<SocioPuesto>  lisSocioP = null;
+        AsyncTask<String,String,ArrayList<SocioPuesto>> asyncTaskSocio;
+        GetSocioPuestoTask getSocioPuestoTask = new GetSocioPuestoTask();
+        asyncTaskSocio = getSocioPuestoTask.execute("4",codSocio);
         try {
-            listAsyncTask = getSeccionesTask.execute("1","0","0");
-            listSeccion = listAsyncTask.get();
+            lisSocioP = (ArrayList<SocioPuesto>) asyncTaskSocio.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
-        if ( listSeccion!= null && listSeccion.size()>0){
-            ArrayList<String> arrayString = GetArrayForAdapter();
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(SelecSeccion.this,android.R.layout.simple_list_item_multiple_choice,arrayString);
-            lvSeccion.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-            lvSeccion.setAdapter(adapter);
+        if (lisSocioP!= null && lisSocioP.size()>0){
 
-
-
+            PuestoSeccionAdapater  adapater = new PuestoSeccionAdapater(SelecSeccion.this,R.layout.lv_puesto_seccion,lisSocioP);
+            lvSocioPuesto.setAdapter(adapater);
         }
+
+
 
     }
 
 
-    public  ArrayList<String> GetArrayForAdapter (){
-
-        ArrayList<String> res = new ArrayList<String>();
-        for (int i = 0; i < listSeccion.size(); i++) {
-
-            Seccion  s = listSeccion.get(i);
-            res.add(s.getDescripcion());
-        }
-
-        return  res;
-    }
-
-    public   void  RegistrarUsuario (){
-        SparseBooleanArray sparseBooleanArray = lvSeccion.getCheckedItemPositions();
-        String resultRegSocio="0";
-        AsyncTask<String,String,String> asyncTaskRegSocio;
-        RegistrarSocioTask registrarSocioTask= new RegistrarSocioTask();
-        int cont = 0;
-
-        try {
-            asyncTaskRegSocio = registrarSocioTask.execute(TipoReg,codSocio,DNI,Nombres,ApePat,ApeMat,Puesto,Celular,TipoUsuario,UserReg,Correo);
-            resultRegSocio = (String)asyncTaskRegSocio.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-        if (Integer.valueOf(resultRegSocio)>0){
-
-            AsyncTask<String,String,String> asyncTaskRegSeccionSocio ;
-            for (int i = 0; i < lvSeccion.getCount() ; i++) {
-                String resultSecSocio ="";
-                if (sparseBooleanArray.get(i)==true){
-
-                    RegistrarSocioSeccionTask registrarSocioSeccionTask = new RegistrarSocioSeccionTask();
-
-                    try {
-                        asyncTaskRegSeccionSocio = registrarSocioSeccionTask.execute(resultRegSocio,listSeccion.get(i).getCodigo());
-                        resultSecSocio = (String) asyncTaskRegSeccionSocio.get();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
-
-                    if (resultSecSocio.equals("OK")){
-                        cont = cont+1;
-                    }
-                }
-
-
-
-            }
 
 
 
 
-        }
 
-        if (cont>0 || TipoReg.equals("EDIT")){
-              String msj  = "Se registro correctamente" ;
-
-            if (TipoReg.equals("EDIT")){
-
-                msj = "Se actualizo correctamente los datos.";
-            }
-            CreateCustomToast(msj, Constantes.icon_succes,Constantes.layout_success);
-            Intent iintent = new Intent(SelecSeccion.this,MenuPrincipal.class);
-            startActivity(iintent);
-        }
-        else {
-
-            CreateCustomToast("No se pudo registrar correctamente" , Constantes.icon_error,Constantes.layout_error);
-
-        }
-
-    }
 
     public void AlerSave() {
         new AlertDialog.Builder(SelecSeccion.this)
@@ -196,7 +96,7 @@ public class SelecSeccion extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
 
                             public void onClick(DialogInterface dialog, int id) {
-                               RegistrarUsuario();
+
 
                             }
                         })
@@ -235,36 +135,5 @@ public class SelecSeccion extends AppCompatActivity {
 
     }
 
-     public  void  SetChekedItemsListView (){
-         ArrayList<Seccion> listSeccionChecked  = null;
-         AsyncTask<String,String,ArrayList<Seccion>> asyncTaskgetSeccionItems ;
-         GetSeccionesTask getSeccionesTaskItems =  new GetSeccionesTask() ;
 
-
-         try {
-             Log.i("cod socio" , codSocio);
-             asyncTaskgetSeccionItems = getSeccionesTaskItems.execute("2","0",codSocio);
-             listSeccionChecked = asyncTaskgetSeccionItems.get();
-         } catch (InterruptedException e) {
-             e.printStackTrace();
-         } catch (ExecutionException e) {
-             e.printStackTrace();
-         }
-
-          if (listSeccionChecked!=null && listSeccionChecked.size()>0) {
-              for (int i = 0; i < listSeccion.size() ; i++) {
-                  String codItem = listSeccion.get(i).getCodigo();
-                  for(  int j = 0 ; j <listSeccionChecked.size() ; j++ ){
-
-                      if (codItem.equals(listSeccionChecked.get(j).getCodigo())){
-
-                          lvSeccion.setItemChecked(i,true);
-                      }
-                  }
-              }
-
-          }
-
-
-     }
 }

@@ -1,13 +1,19 @@
 package com.online_code.acmenconle;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
+import android.os.CpuUsageInfo;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,11 +32,12 @@ import java.util.concurrent.ExecutionException;
 
 import Model.Usuario;
 import Tasks.AutenticarTask;
+import Tasks.RegistrarSocioTask;
 import Utils.Constantes;
 
 public class RegistrarUsuario extends AppCompatActivity {
 
-    EditText txtDNI,txtNombres, txtApellidoPat , txtApeMat , txtPuesto , txtCelular , txtCorreo;
+    EditText txtDNI,txtNombres, txtApellidoPat , txtApeMat  , txtCelular , txtCorreo;
     Spinner spTipoUser ;
     ActionBar actionBarGlobal;
     ActionBar actionBar;
@@ -38,7 +45,8 @@ public class RegistrarUsuario extends AppCompatActivity {
     LinearLayout butonBar;
 
     String TipoReg, dni ;
-    String codSocio ;
+    String codSocio,UserReg ;
+    SharedPreferences preferences;
 
     private String TAG = RegistrarUsuario.class.getSimpleName();
     float initialX, initialY;
@@ -47,6 +55,8 @@ public class RegistrarUsuario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_usuario);
+        preferences = PreferenceManager.getDefaultSharedPreferences(RegistrarUsuario.this);
+        UserReg = preferences.getString("UserDni",null);
         butonBar = (LinearLayout)findViewById(R.id.buttonBarRegUs);
         butonBar.setVisibility(View.INVISIBLE);
         TipoReg =  getIntent().getExtras().getString("TipoReg");
@@ -54,7 +64,7 @@ public class RegistrarUsuario extends AppCompatActivity {
         txtNombres = (EditText)findViewById(R.id.txtNombreUs);
         txtApellidoPat = (EditText)findViewById(R.id.txtApePatUs);
         txtApeMat = (EditText)findViewById(R.id.txtApeMatUs);
-        txtPuesto = (EditText)findViewById(R.id.txtPuestoUs);
+
         txtCelular = (EditText)findViewById(R.id.txtCelUs);
         spTipoUser = (Spinner) findViewById(R.id.spTipoUser);
         btnSiguiente = (Button) findViewById(R.id.btnSigRegUs);
@@ -94,25 +104,7 @@ public class RegistrarUsuario extends AppCompatActivity {
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ValidarFomrato()==true) {
-                    Intent intent = new Intent(RegistrarUsuario.this, SelecSeccion.class);
-                    intent.putExtra("TipoReg", TipoReg);
-                    intent.putExtra("dni",txtDNI.getText().toString());
-                    intent.putExtra("nombre",txtNombres.getText().toString());
-                    intent.putExtra("apePat", txtApellidoPat.getText().toString());
-                    intent.putExtra("apeMat",txtApeMat.getText().toString());
-                    intent.putExtra("puesto", txtPuesto.getText().toString());
-                    intent.putExtra("celular" ,txtCelular.getText().toString());
-                    intent.putExtra("tipoUs",spTipoUser.getSelectedItem().toString());
-                    intent.putExtra("correo",txtCorreo.getText().toString());
-                    if (TipoReg.equals("EDIT")){
-                        intent.putExtra("codSocio", codSocio);
-                    }
-
-
-                    startActivity(intent);
-                }
-
+                 AlerSave();
             }
         });
     }
@@ -212,11 +204,7 @@ public class RegistrarUsuario extends AppCompatActivity {
             msj = "Debe ingresar  el apellido materno";
             res = false;
         }
-        else  if ( txtPuesto.getText().toString().equals("")){
 
-            msj = "Debe ingresar el número de puesto.";
-            res = false;
-        }
 
         else  if (spTipoUser.getSelectedItemPosition()==0){
 
@@ -255,7 +243,7 @@ public class RegistrarUsuario extends AppCompatActivity {
             txtNombres.setText(us.getNombres());
             txtApellidoPat.setText(us.getApellidoPat());
             txtApeMat.setText(us.getApellidoMat());
-            txtPuesto.setText(us.getPuesto());
+
             txtCelular.setText(us.getCelular());
             txtCorreo.setText(us.getCorreo());
              codSocio = us.getCodigo();
@@ -291,5 +279,58 @@ public class RegistrarUsuario extends AppCompatActivity {
         toast.show();
 
 
+    }
+
+
+
+    public void AlerSave() {
+        new AlertDialog.Builder(RegistrarUsuario.this)
+                .setTitle("Advertencia")
+                .setMessage("¿Esta seguro que desea guardar los datos?")
+                //  .setIcon(R.drawable.icn_alert)
+                .setPositiveButton("SI",
+                        new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int id) {
+                                RegistrarUsuario();
+
+                            }
+                        })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+                    }
+                }).show();
+
+    }
+
+    public   void  RegistrarUsuario () {
+
+        String resultRegSocio = "0";
+        AsyncTask<String, String, String> asyncTaskRegSocio;
+        RegistrarSocioTask registrarSocioTask = new RegistrarSocioTask();
+        int cont = 0;
+
+        if (ValidarFomrato() == true) {
+            String tipoUs = spTipoUser.getSelectedItem().toString().substring(0,3);
+            try {
+                asyncTaskRegSocio = registrarSocioTask.execute(TipoReg, codSocio, txtDNI.getText().toString(), txtNombres.getText().toString(),
+                            txtApellidoPat.getText().toString(), txtApeMat.getText().toString(), "", txtCelular.getText().toString(), tipoUs, UserReg, txtCorreo.getText().toString());
+                resultRegSocio = (String) asyncTaskRegSocio.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        if (Integer.valueOf(resultRegSocio)>0){
+
+            CreateCustomToast("Se registro correctamente el usuario/socio", Constantes.icon_succes, Constantes.layout_success);
+            super.onBackPressed();
+        }
     }
 }

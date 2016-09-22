@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class MenuModUsuarios extends AppCompatActivity {
 
-    Button btnRegistrarUs , btnListUsuario ;
+    Button btnRegistrarUs , btnListUsuario,btnAsignar ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,6 +16,7 @@ public class MenuModUsuarios extends AppCompatActivity {
         setTitle("Módulo Usuarios");
         btnRegistrarUs = (Button)findViewById(R.id.btnRegUsuario);
         btnListUsuario = (Button) findViewById(R.id.btnListarUsuario);
+        btnAsignar = (Button)findViewById(R.id.btnAsignarPuesto);
 
         btnRegistrarUs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +31,14 @@ public class MenuModUsuarios extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MenuModUsuarios.this, ListarUsuarios.class);
+                startActivity(intent);
+            }
+        });
+
+        btnAsignar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuModUsuarios.this , SelecSeccion.class);
                 startActivity(intent);
             }
         });

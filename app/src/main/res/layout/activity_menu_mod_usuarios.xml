@@ -33,6 +33,17 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:text="ASIGNAR PUESTO"
+                android:drawableLeft="@drawable/icn_market_48"
+                android:id="@+id/btnAsignarPuesto"
+                android:background="@drawable/boton_silver"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:text="LISTA USUARIOS"
                 android:drawableLeft="@drawable/icn_user_search_48"
                 android:id="@+id/btnListarUsuario"

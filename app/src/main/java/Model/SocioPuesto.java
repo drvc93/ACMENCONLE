@@ -10,11 +10,15 @@ public class SocioPuesto {
     private  String estado ;
     private  String fechaReg;
     private  String userReg;
+    private  String codSeccion;
+
+
+
 
     public SocioPuesto() {
     }
 
-    public SocioPuesto(String codSocion, String codNumeroPuesto, String estado, String fechaReg, String userReg) {
+    public SocioPuesto(String codSocion, String codNumeroPuesto, String estado, String fechaReg, String userReg,String CodSeccion) {
 
 
         this.codSocion = codSocion;
@@ -22,6 +26,7 @@ public class SocioPuesto {
         this.estado = estado;
         this.fechaReg = fechaReg;
         this.userReg = userReg;
+        this.codSeccion = CodSeccion;
     }
 
 
@@ -64,4 +69,12 @@ public class SocioPuesto {
     public void setUserReg(String userReg) {
         this.userReg = userReg;
     }
+    public String getCodSeccion() {
+        return codSeccion;
+    }
+
+    public void setCodSeccion(String codSeccion) {
+        this.codSeccion = codSeccion;
+    }
+
 }

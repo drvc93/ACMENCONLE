@@ -52,6 +52,7 @@ public class GetSocioPuestoTask extends AsyncTask<String,String,ArrayList<SocioP
                 sec.setEstado(ic.getProperty(2).toString());
                 sec.setFechaReg(ic.getProperty(3).toString());
                 sec.setUserReg(ic.getProperty(4).toString());
+                sec.setCodSeccion(ic.getProperty(5).toString());
 
 
                 result.add(sec);

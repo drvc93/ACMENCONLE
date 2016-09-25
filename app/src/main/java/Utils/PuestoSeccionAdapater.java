@@ -59,7 +59,7 @@ public class PuestoSeccionAdapater extends ArrayAdapter<SocioPuesto> {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
 
-        ViewHolder viewHolder;
+        final ViewHolder viewHolder;
         final SocioPuesto socio = data.get(position);
         if (convertView == null) {
 
@@ -82,8 +82,7 @@ public class PuestoSeccionAdapater extends ArrayAdapter<SocioPuesto> {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     indexSpiner.put(position,i);
-                    Log.i("Posicion "+ String.valueOf(position)," indexsp >"+ String.valueOf(i)  );
-
+                    data.get(position).setCodSeccion(viewHolder.spSeccion.getSelectedItem().toString().substring(0,3).trim());
                 }
 
                 @Override
@@ -129,9 +128,9 @@ public class PuestoSeccionAdapater extends ArrayAdapter<SocioPuesto> {
 
     public int GetSpinerIndex (int cod ){
         int result=0;
-        for (int i = 0; i < data.size() ; i++) {
+        for (int i = 0; i < listSpiner.size() ; i++) {
 
-            if (Integer.valueOf(data.get(i).getCodSeccion()) ==cod){
+            if (Integer.valueOf(listSpiner.get(i).substring(0,3).trim()) ==cod){
                 result = i;
                 break;
             }
@@ -174,8 +173,8 @@ public class PuestoSeccionAdapater extends ArrayAdapter<SocioPuesto> {
     }
 
     public ArrayAdapter<String> getAdapterSpiner (){
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,listSpiner);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_dropdown_item,listSpiner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         return  adapter;
 
@@ -185,6 +184,20 @@ public class PuestoSeccionAdapater extends ArrayAdapter<SocioPuesto> {
     public SocioPuesto GetItem(int position) {
 
         return data.get(position);
+    }
+
+    public  ArrayList<SocioPuesto> GetAllData (){
+
+        return  data;
+
+    }
+
+    public void  AddItem (){
+
+        SocioPuesto  sc = new SocioPuesto("0","0","0","","","01");
+        data.add(sc);
+        this.notifyDataSetChanged();
+
     }
     }
 

@@ -14,20 +14,22 @@ import Utils.Constantes;
 /**
  * Created by drvc_ on 15/09/2016.
  */
-public class RegistrarSocioSeccionTask extends AsyncTask<String,String,String> {
+public class RegistrarSocioPuestoTask extends AsyncTask<String,String,String> {
     @Override
     protected String doInBackground(String... strings) {
         String result ="";
         // String urlserver = params[2];
         final String NAMESPACE = Constantes.UrlWS;
         final String URL=NAMESPACE+Constantes.NameSpaceWS;
-        final String METHOD_NAME = "InsertSocioSeccion";
+        final String METHOD_NAME = "InsertSocioPuesto";
         final String SOAP_ACTION = NAMESPACE+METHOD_NAME;
 
         SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 
         request.addProperty("codSocio", strings[0]);
-        request.addProperty("codSeccion", strings[1]);
+        request.addProperty("nroPuesto", strings[1]);
+        request.addProperty("codSeccion", strings[2]);
+        request.addProperty("userReg", strings[3]);
 
 
         SoapSerializationEnvelope envelope =  new SoapSerializationEnvelope(SoapEnvelope.VER11);

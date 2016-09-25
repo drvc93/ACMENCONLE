@@ -32,7 +32,7 @@ public class RegistrarSocioTask extends AsyncTask<String,String,String> {
         request.addProperty("nombres", strings[3]);
         request.addProperty("apePat", strings[4]);
         request.addProperty("apeMat", strings[5]);
-        request.addProperty("puesto", strings[6]);
+        request.addProperty("puesto", "0");
         request.addProperty("celular", strings[7]);
         request.addProperty("tipoUs", strings[8]);
         request.addProperty("userReg", strings[9]);

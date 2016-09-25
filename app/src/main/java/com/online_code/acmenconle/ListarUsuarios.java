@@ -1,7 +1,9 @@
 package com.online_code.acmenconle;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +18,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import Model.SocioPuesto;
 import Model.Usuario;
 import Tasks.AutenticarTask;
 
@@ -23,6 +26,7 @@ public class ListarUsuarios extends AppCompatActivity {
     ArrayList<Usuario> listaUsuarios ;
     ListView lvUsuarios ;
     EditText txtSearch ;
+    int EDITAR = 0 , ASIGNAR=1;
     ArrayList<String> listNombres;
     public  ArrayAdapter<String> adapterLV;
     @Override
@@ -38,13 +42,7 @@ public class ListarUsuarios extends AppCompatActivity {
         lvUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String  getdni  = lvUsuarios.getItemAtPosition(i).toString();
-                getdni = getdni.substring(0,8);
-                getdni = getdni.trim();
-                Intent  intent = new Intent(ListarUsuarios.this,RegistrarUsuario.class);
-                intent.putExtra("DNI",getdni);
-                intent.putExtra("TipoReg","EDIT");
-                startActivity(intent);
+               AlerOpcion(i);
             }
         });
     }
@@ -106,5 +104,78 @@ public class ListarUsuarios extends AppCompatActivity {
 
 
         ListarUsuarios.this.adapterLV.getFilter().filter(txtSearch.getText().toString());
+    }
+
+
+    public  void  SeleccionarOpcion (int accion, int position ){
+        if (accion==EDITAR) {
+            String getdni = lvUsuarios.getItemAtPosition(position).toString();
+            getdni = getdni.substring(0, 8);
+            getdni = getdni.trim();
+            Intent intent = new Intent(ListarUsuarios.this, RegistrarUsuario.class);
+            intent.putExtra("DNI", getdni);
+            intent.putExtra("TipoReg", "EDIT");
+            startActivity(intent);
+        }
+
+        else  if (accion==ASIGNAR){
+            String  getdni  = lvUsuarios.getItemAtPosition(position).toString();
+            getdni = getdni.substring(0,8);
+            Usuario us = UserFromDni(getdni);
+            if (us!=null){
+
+              Intent intent = new Intent(ListarUsuarios.this , SelecSeccion.class );
+                intent.putExtra("CodSocio",us.getCodigo());
+                intent.putExtra("NombreSocio", us.getApellidoPat()+ " "+ us.getApellidoMat() + " " + us.getNombres());
+                startActivity(intent);
+
+            }
+
+
+        }
+
+    }
+
+
+    public void AlerOpcion(final int pos) {
+
+    /*
+     * WebView is created programatically here.
+     *
+     * @Here are the list of items to be shown in the list
+     */
+        final CharSequence[] items = { "Editar datos", "Asignar puesto" };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(ListarUsuarios.this);
+        builder.setTitle("Seleccionar opción ");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+
+                SeleccionarOpcion(item,pos);
+                // will toast your selection
+               // showToast("Name: " + items[item]);
+                dialog.dismiss();
+
+            }
+        }).show();
+    }
+
+    public  Usuario UserFromDni (String dni) {
+        Usuario result = null;
+        for (int i = 0; i <listaUsuarios.size() ; i++) {
+
+            Usuario u = listaUsuarios.get(i);
+
+            if (u.getDni().equals(dni)){
+
+                result = u;
+                break;
+            }
+
+        }
+
+        return  result;
+
+
     }
 }

@@ -2,7 +2,9 @@ package com.online_code.acmenconle;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +13,16 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -24,31 +31,50 @@ import Model.Banco;
 import Model.ConceptoPago;
 import Tasks.GetBancosTask;
 import Tasks.GetConceptosPagoTask;
+import Tasks.GetPuestosSocioTask;
+import Tasks.GetSocioPuestoTask;
+import Tasks.RegistrarPagoTask;
+import Utils.Constantes;
 
 public class FormularioPago extends AppCompatActivity {
 
     ArrayList<Banco> listBancos;
     ArrayList<ConceptoPago> listConceptos;
-    Spinner spBanco, spConcepto;
-    EditText txtFecha, txtMensaje, txtMontoPago;
+    Spinner spBanco, spConcepto, spPuesto;
+    EditText txtFecha, txtMensaje, txtMontoPago, txtNroOpe;
     Button btnRegPago;
+    SharedPreferences preferences;
+    String dniSocio ,codSocio;
+    String FechaFinal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_pago);
         setTitle("Formulario de pago");
+        preferences = PreferenceManager.getDefaultSharedPreferences(FormularioPago.this);
+        dniSocio = preferences.getString("UserDni",null);
+        codSocio = preferences.getString("CodSocio",null);
         spBanco = (Spinner) findViewById(R.id.spBanco);
         spConcepto = (Spinner) findViewById(R.id.spConcepto);
-
+        spPuesto = (Spinner) findViewById(R.id.spPuesto);
         txtFecha = (EditText) findViewById(R.id.txtFechaPago);
         txtMensaje = (EditText) findViewById(R.id.txtMensajePago);
+        txtNroOpe = (EditText) findViewById(R.id.txtNroOperacion);
         btnRegPago = (Button) findViewById(R.id.btnRegPago);
         txtMontoPago = (EditText) findViewById(R.id.txtMontoPago);
         txtMontoPago.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
         LoadSpinerBancos();
         LoadSpinerConcepto();
+        LoadSpinerPuestos(dniSocio);
+
+        btnRegPago.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlerSave();
+            }
+        });
 
         txtFecha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +85,43 @@ public class FormularioPago extends AppCompatActivity {
             }
         });
     }
+
+
+
+     public  void  RegistrarPago () {
+         String accion  = "NEW" ;
+         String codConcepto = spConcepto.getSelectedItem().toString().substring(0,3).trim();
+         String nroOp = txtNroOpe.getText().toString();
+         String codBanco =  spBanco.getSelectedItem().toString().substring(0,3).trim();
+         String obs  = txtMensaje.getText().toString();
+         String monto = txtMontoPago.getText().toString();
+        // monto  = monto.replace(".",",");
+
+         String puesto = spPuesto.getSelectedItem().toString();
+         String fecha = txtFecha.getText().toString();
+         RegistrarPagoTask registrarPagoTask = new RegistrarPagoTask();
+         AsyncTask<String,String,String> asyncTaskPago  ;
+         String res   = null;
+         Log.i("Monto Pago " ,  monto);
+
+         try {
+             asyncTaskPago = registrarPagoTask.execute(accion,codSocio,codConcepto,nroOp,codBanco,obs,monto,puesto,FechaFinal);
+             res =  (String)  asyncTaskPago.get();
+         } catch (InterruptedException e) {
+             e.printStackTrace();
+         } catch (ExecutionException e) {
+             e.printStackTrace();
+         }
+
+
+         if (res.equals("OK") ){
+
+             CreateCustomToast("Se envio la información correctamente  , en el transcurso del día se confirmara el pago", Constantes.icon_succes,Constantes.layout_success);
+
+         }
+
+     }
+
 
     public void LoadSpinerBancos() {
 
@@ -127,6 +190,31 @@ public class FormularioPago extends AppCompatActivity {
 
     }
 
+    public  void  LoadSpinerPuestos (String codSocio){
+        ArrayList<String> listPuestos = null;
+        AsyncTask<String,String,ArrayList<String>>  asyncTaskPuestos;
+        GetPuestosSocioTask getSocioPuestoTask = new GetPuestosSocioTask();
+
+
+
+        try {
+            asyncTaskPuestos = getSocioPuestoTask.execute("5",codSocio);
+            listPuestos = (ArrayList<String>) asyncTaskPuestos.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        if (listPuestos!= null && listPuestos.size()>0){
+
+            ArrayAdapter<String> adapterPuestos = new ArrayAdapter<String>(FormularioPago.this,android.R.layout.simple_spinner_dropdown_item,listPuestos);
+            adapterPuestos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spPuesto.setAdapter(adapterPuestos);
+
+        }
+    }
+
     public void SelecFecha() {
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -146,7 +234,7 @@ public class FormularioPago extends AppCompatActivity {
                         String dia = String.format("%02d", day);
                         txtFecha.setText(dia + "/" + mes + "/" + String.valueOf(year));
 
-                           // FinicioGlobal = String.valueOf(year) + "-" + mes + "-" + dia;
+                            FechaFinal = mes + "/" + dia + "/" + String.valueOf(year);
                           //  FFinGlobal = String.valueOf(year) + "-" + mes + "-" + dia;
                          //   Log.i("Fecha global FIN => ", FFinGlobal);
 
@@ -155,5 +243,53 @@ public class FormularioPago extends AppCompatActivity {
                     }
 
                 }).show();
+    }
+
+    public void AlerSave() {
+        new AlertDialog.Builder(FormularioPago.this)
+                .setTitle("Advertencia")
+                .setIcon(R.drawable.icn_alert)
+                .setMessage("¿Esta seguro que desea enviar la información?")
+                //  .setIcon(R.drawable.icn_alert)
+                .setPositiveButton("SI",
+                        new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int id) {
+                                RegistrarPago();
+                            }
+                        })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+                    }
+                }).show();
+
+    }
+
+    public void CreateCustomToast(String msj, int icon, int backgroundLayout) {
+
+        LayoutInflater infator = getLayoutInflater();
+        View layout = infator.inflate(R.layout.toast_alarm_success, (ViewGroup) findViewById(R.id.toastlayout));
+        TextView toastText = (TextView) layout.findViewById(R.id.txtDisplayToast);
+        ImageView imgIcon = (ImageView) layout.findViewById(R.id.imgToastSucc);
+        LinearLayout parentLayout = (LinearLayout) layout.findViewById(R.id.toastlayout);
+        imgIcon.setImageResource(icon);
+        final int sdk = android.os.Build.VERSION.SDK_INT;
+        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            parentLayout.setBackgroundDrawable(getResources().getDrawable(backgroundLayout));
+        } else {
+            parentLayout.setBackground(getResources().getDrawable(backgroundLayout));
+        }
+
+
+        toastText.setText(msj);
+        Toast toast = new Toast(FormularioPago.this);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+
+
     }
 }

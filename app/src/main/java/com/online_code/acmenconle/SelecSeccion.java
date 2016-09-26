@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -37,7 +38,7 @@ public class SelecSeccion extends AppCompatActivity {
     SharedPreferences preferences;
     String userReg;
     String codSocio ,UserNames;
-
+    Button btnRgUsuarioP ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,6 +46,7 @@ public class SelecSeccion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selec_seccion);
         lvSocioPuesto = (ListView) findViewById(R.id.LVSecciones);
+        btnRgUsuarioP = (Button)findViewById(R.id.btnRegUsuarioP);
         preferences = PreferenceManager.getDefaultSharedPreferences(SelecSeccion.this);
         userReg = preferences.getString("UserDni",null);
         codSocio = getIntent().getStringExtra("CodSocio");
@@ -53,6 +55,12 @@ public class SelecSeccion extends AppCompatActivity {
         LoadListview(codSocio);
 
 
+         btnRgUsuarioP.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 AlerSave(codSocio);
+             }
+         });
 
     }
 

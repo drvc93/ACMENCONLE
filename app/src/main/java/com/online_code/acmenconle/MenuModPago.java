@@ -22,7 +22,7 @@ public class MenuModPago extends AppCompatActivity {
         btnFormPago.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MenuModPago.this , FormularioPago.class);
+                Intent intent = new Intent(MenuModPago.this , ListaBancos.class);
                 startActivity(intent);
             }
         });

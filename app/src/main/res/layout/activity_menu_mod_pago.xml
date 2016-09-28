@@ -23,7 +23,7 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Formulario de pago"
+                android:text="REALIIZAR PAGO"
                 android:drawableLeft="@drawable/form_pago_48"
                 android:id="@+id/btnFormPago"
                 android:background="@drawable/boton_silver"

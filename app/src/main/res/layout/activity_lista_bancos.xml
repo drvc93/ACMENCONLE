@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/blue_clear_bg">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/scrollView6" >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#75c8caca"
+                    android:layout_marginTop="20dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/bbva_logo" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/boton_silver">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PAGO POR VIGILANCIA"
+                                android:id="@+id/textView20"
+                                android:layout_gravity="center_horizontal"
+                                android:textStyle="bold"
+                                android:textColor="#000000" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="CTA. Nº  12-5487-2487-87"
+                                android:id="@+id/textView21"
+                                android:layout_gravity="center_horizontal"
+                                android:textColor="#1c1c1c" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:text="Realizar Pago desde aquí"
+                        android:id="@+id/btnBBVA"
+                        android:drawableLeft="@drawable/icn_pay_next"
+                        android:background="@drawable/boton_silver"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#75c8caca"
+                    android:layout_marginTop="10dp" >
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imageView4"
+                            android:src="@drawable/bcp_logo" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/boton_silver" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PAGO POR DESAGÜE,AGUA Y VEREDAS"
+                                android:id="@+id/textView22"
+                                android:layout_gravity="center_horizontal"
+                                android:textStyle="bold"
+                                android:textColor="#000000"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="CTA. Nº  45-3425-2487-87"
+                                android:id="@+id/textView23"
+                                android:layout_gravity="center_horizontal"
+                                android:textColor="#1c1c1c" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:text="Realizar Pago desde aquí"
+                        android:id="@+id/btnBCP"
+                        android:drawableLeft="@drawable/icn_pay_next"
+                        android:background="@drawable/boton_silver"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#75c8caca"
+                    android:layout_marginTop="10dp" >
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imageView5"
+                            android:src="@drawable/interbank_logo" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/boton_silver" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PAGO POR OTROS SERVICIOS"
+                                android:id="@+id/textView24"
+                                android:layout_gravity="center_horizontal"
+                                android:textStyle="bold"
+                                android:textColor="#000000" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="CTA. Nº  23-7678-333-87"
+                                android:id="@+id/textView25"
+                                android:layout_gravity="center_horizontal"
+                                android:textColor="#1c1c1c" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:text="Realizar Pago desde aquí"
+                        android:id="@+id/btnINTBK"
+                        android:drawableLeft="@drawable/icn_pay_next"
+                        android:background="@drawable/boton_silver"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        style="@android:style/ButtonBar"
+        android:gravity="center"
+        android:background="#4a07416b"
+        android:orientation="vertical">
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

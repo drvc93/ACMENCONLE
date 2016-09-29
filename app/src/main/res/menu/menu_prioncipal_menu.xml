@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/InfoUser"
+        android:icon="@drawable/icn_user_white_48"
+        android:title="Back"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/CerrarSesion"
+        android:icon="@drawable/icn_close_session_48"
+        android:title="Back"
+        app:showAsAction="always" />
+
+
+
+</menu>

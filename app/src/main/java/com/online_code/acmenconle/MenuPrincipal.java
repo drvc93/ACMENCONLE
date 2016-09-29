@@ -6,6 +6,9 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,7 +21,7 @@ import Utils.Constantes;
 
 public class MenuPrincipal extends AppCompatActivity {
     SharedPreferences preferences;
-    String username  ;
+    String username ,nropuesto  ;
     Button btnModUsuarios , btnModPagos,  btnModEcnuesta,btnModEvento ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +34,11 @@ public class MenuPrincipal extends AppCompatActivity {
 
         preferences = PreferenceManager.getDefaultSharedPreferences(MenuPrincipal.this);
         username = preferences.getString("UserName",null);
+        nropuesto  = preferences.getString("nroPuesto", null);
         if (username!= null && username.length()>0){
 
             CreateCustomToast("Bienvenido "+ username, Constantes.icon_succes,Constantes.layout_success);
+
         }
 
 
@@ -52,6 +57,30 @@ public class MenuPrincipal extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_prioncipal_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.InfoUser) {
+
+
+
+        }
+        if (id == R.id.CerrarSesion) {
+
+
+        }
+
+        return true;
     }
 
 

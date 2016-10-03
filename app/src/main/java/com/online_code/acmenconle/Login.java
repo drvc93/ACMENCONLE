@@ -150,6 +150,7 @@ public class Login extends AppCompatActivity {
             editor.putString("TipoUser",user.getTipoUsuario());
             editor.putString("CodSocio",user.getCodigo());
             editor.putString("UserName",user.getNombres());
+            editor.putString("UserNombreLargo",user.getNombres() + " " + user.getApellidoPat()+ " " + user.getApellidoMat());
             editor.commit();
             SelecPuesto(user.getDni());
            //ntent intent = new Intent(Login.this , MenuPrincipal.class);

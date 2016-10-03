@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="20/03/2016"
+            android:id="@+id/lblFechaRPE"
+            android:textColor="#010101"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="202.70"
+            android:id="@+id/lblMontoRPE"
+            android:textStyle="bold"
+            android:textColor="#222974"
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="BCP"
+            android:id="@+id/lblBancoRPE"
+            android:textColor="#010101"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="40"
+            android:id="@+id/lblNroPuestoRPE"
+            android:textColor="#010101"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp" />
+    </LinearLayout>
+</LinearLayout>

@@ -40,12 +40,13 @@ public class FormularioPago extends AppCompatActivity {
 
     ArrayList<Banco> listBancos;
     ArrayList<ConceptoPago> listConceptos;
-    Spinner spBanco, spConcepto, spPuesto;
+   // Spinner spBanco, spConcepto, spPuesto;
     EditText txtFecha, txtMensaje, txtMontoPago, txtNroOpe;
     Button btnRegPago;
     SharedPreferences preferences;
     String dniSocio ,codSocio;
-    String FechaFinal;
+    String FechaFinal,NroPuesto ;
+    String paramBanco , paramConcepto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +56,18 @@ public class FormularioPago extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(FormularioPago.this);
         dniSocio = preferences.getString("UserDni",null);
         codSocio = preferences.getString("CodSocio",null);
-        spBanco = (Spinner) findViewById(R.id.spBanco);
-        spConcepto = (Spinner) findViewById(R.id.spConcepto);
-        spPuesto = (Spinner) findViewById(R.id.spPuesto);
+        NroPuesto =  preferences.getString("nroPuesto",null);
+        //spBanco = (Spinner) findViewById(R.id.spBanco);
+      //  spConcepto = (Spinner) findViewById(R.id.spConcepto);
+    //    spPuesto = (Spinner) findViewById(R.id.spPuesto);
         txtFecha = (EditText) findViewById(R.id.txtFechaPago);
         txtMensaje = (EditText) findViewById(R.id.txtMensajePago);
         txtNroOpe = (EditText) findViewById(R.id.txtNroOperacion);
         btnRegPago = (Button) findViewById(R.id.btnRegPago);
         txtMontoPago = (EditText) findViewById(R.id.txtMontoPago);
         txtMontoPago.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-
+        paramBanco = getIntent().getStringExtra("prmCodBanco");
+        paramConcepto = getIntent().getStringExtra("prmConcepto");
         LoadSpinerBancos();
         LoadSpinerConcepto();
         LoadSpinerPuestos(dniSocio);
@@ -72,7 +75,9 @@ public class FormularioPago extends AppCompatActivity {
         btnRegPago.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlerSave();
+                if (ValidarPago() == true) {
+                    AlerSave();
+                }
             }
         });
 
@@ -87,17 +92,46 @@ public class FormularioPago extends AppCompatActivity {
     }
 
 
+    public boolean ValidarPago (){
+            boolean res = true ;
+            String msj = "";
+
+        if (txtNroOpe.getText().toString()==null || txtNroOpe.getText().toString().equals("")){
+
+            msj="Debe  ingresar el número de operación.";
+
+            res = false;
+
+        }
+        else  if (txtMontoPago.getText().toString()==null || txtMontoPago.getText().toString().equals("")){
+
+            msj= "Debe ingresar el monto pagado.";
+            res = false;
+        }
+
+        else  if (txtFecha.getText().toString()==null || txtFecha.getText().toString().equals("")){
+
+            msj ="Debe seleccionar la fecha de pago.";
+
+            res = false;
+        }
+
+        return  res;
+    }
+
+
+
 
      public  void  RegistrarPago () {
          String accion  = "NEW" ;
-         String codConcepto = spConcepto.getSelectedItem().toString().substring(0,3).trim();
+         String codConcepto = paramConcepto;
          String nroOp = txtNroOpe.getText().toString();
-         String codBanco =  spBanco.getSelectedItem().toString().substring(0,3).trim();
+         String codBanco =  paramBanco;
          String obs  = txtMensaje.getText().toString();
          String monto = txtMontoPago.getText().toString();
         // monto  = monto.replace(".",",");
 
-         String puesto = spPuesto.getSelectedItem().toString();
+         String puesto = NroPuesto;
          String fecha = txtFecha.getText().toString();
          RegistrarPagoTask registrarPagoTask = new RegistrarPagoTask();
          AsyncTask<String,String,String> asyncTaskPago  ;
@@ -117,6 +151,7 @@ public class FormularioPago extends AppCompatActivity {
          if (res.equals("OK") ){
 
              CreateCustomToast("Se envio la información correctamente  , en el transcurso del día se confirmara el pago", Constantes.icon_succes,Constantes.layout_success);
+             super.onBackPressed();
 
          }
 
@@ -147,8 +182,8 @@ public class FormularioPago extends AppCompatActivity {
 
             ArrayAdapter<String> adaparteBanco = new ArrayAdapter<String>(FormularioPago.this, android.R.layout.simple_spinner_dropdown_item, dataBancos);
             adaparteBanco.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spBanco.setPrompt("Seleccionar Banco");
-            spBanco.setAdapter(adaparteBanco);
+          //  spBanco.setPrompt("Seleccionar Banco");
+            //spBanco.setAdapter(adaparteBanco);
 
 
         }
@@ -182,8 +217,8 @@ public class FormularioPago extends AppCompatActivity {
 
             ArrayAdapter<String> adapterConceptos   = new ArrayAdapter<String>(FormularioPago.this,android.R.layout.simple_spinner_dropdown_item,dataConceptos);
             adapterConceptos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spConcepto.setPrompt("Seleccionar concepto pago");
-            spConcepto.setAdapter(adapterConceptos);
+            //spConcepto.setPrompt("Seleccionar concepto pago");
+           // spConcepto.setAdapter(adapterConceptos);
         }
 
 
@@ -210,7 +245,7 @@ public class FormularioPago extends AppCompatActivity {
 
             ArrayAdapter<String> adapterPuestos = new ArrayAdapter<String>(FormularioPago.this,android.R.layout.simple_spinner_dropdown_item,listPuestos);
             adapterPuestos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spPuesto.setAdapter(adapterPuestos);
+            //spPuesto.setAdapter(adapterPuestos);
 
         }
     }

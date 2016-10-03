@@ -33,7 +33,8 @@
         <activity android:name=".SelecSeccion" />
         <activity android:name=".MenuModPago" />
         <activity android:name=".FormularioPago" />
-        <activity android:name=".ListaBancos"></activity>
+        <activity android:name=".ListaBancos" />
+        <activity android:name=".ReportePagoEfec"></activity>
     </application>
 
 </manifest>

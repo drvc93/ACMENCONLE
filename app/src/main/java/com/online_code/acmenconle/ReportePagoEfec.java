@@ -1,10 +1,14 @@
 package com.online_code.acmenconle;
 
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -16,6 +20,7 @@ import java.util.concurrent.ExecutionException;
 import Model.CPagos;
 import Tasks.GetMaxMinFechaPTask;
 import Tasks.GetReportePagosTask;
+import Tasks.GetSeccionFromSocioTask;
 import Utils.RepPagosEfeAdapater;
 
 public class ReportePagoEfec extends AppCompatActivity {
@@ -38,7 +43,14 @@ public class ReportePagoEfec extends AppCompatActivity {
         lblSeccion = (TextView) findViewById(R.id.lblCabSeccion);
         txtIntervFechas = (TextView)findViewById(R.id.txtCABIntervFechas);
         lvRep = (ListView) findViewById(R.id.lvRepPagoEfectuados);
+        ActionBar  actionBar = getSupportActionBar();
+        if (GetDisplaySize() < (45/10)) {
 
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            actionBar.hide();
+        } else {
+           // actionBar.show();
+        }
         SetFechaMaxMinPago();
         SetCabecera();
         LoadListView();
@@ -82,6 +94,7 @@ public class ReportePagoEfec extends AppCompatActivity {
 
         lblCabSocio.setText(nombreLargo);
         lblCabNroPuesto.setText(nroPuesto);
+        lblSeccion.setText(GetSeccion());
 
 
     }
@@ -107,6 +120,43 @@ public class ReportePagoEfec extends AppCompatActivity {
              lvRep.setAdapter(adapater);
          }
 
+    }
+
+    public String GetSeccion () {
+         String res = null;
+            AsyncTask<String,String,String>asyncTaskSeccion ;
+           GetSeccionFromSocioTask getSeccionFromSocioTask = new GetSeccionFromSocioTask();
+
+        try {
+            asyncTaskSeccion = getSeccionFromSocioTask.execute("1",codSocio,nroPuesto);
+            res  = (String) asyncTaskSeccion.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        if (res== null && res.equals("")){
+
+            res = "no se encontro seccion";
+        }
+
+        return  res;
+    }
+
+    public double GetDisplaySize() {
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+        int dens = dm.densityDpi;
+        double wi = (double) width / (double) dens;
+        double hi = (double) height / (double) dens;
+        double x = Math.pow(wi, 2);
+        double y = Math.pow(hi, 2);
+        double screenInches = Math.sqrt(x + y);
+        Log.i("Pulgadas => ", String.valueOf(screenInches));
+        return screenInches;
     }
 
 

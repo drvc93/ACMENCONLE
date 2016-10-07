@@ -12,29 +12,24 @@ import org.ksoap2.transport.HttpTransportSE;
 import Utils.Constantes;
 
 /**
- * Created by drvc_ on 03/10/2016.
+ * Created by drvc_ on 07/10/2016.
  */
-public class GetMaxMinFechaPTask extends AsyncTask<String,String,String> {
+public class GetSeccionFromSocioTask extends AsyncTask<String,String,String> {
     @Override
     protected String doInBackground(String... strings) {
         String result ="";
         // String urlserver = params[2];
         final String NAMESPACE = Constantes.UrlWS;
         final String URL=NAMESPACE+Constantes.NameSpaceWS;
-        final String METHOD_NAME = "GetFechaMaxMinPago";
+        final String METHOD_NAME = "GetSeccionFromSocio";
         final String SOAP_ACTION = NAMESPACE+METHOD_NAME;
 
         SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 
         request.addProperty("accion", strings[0]);
-        request.addProperty("TipoFecha", strings[1]);
-        request.addProperty("codSocio", strings[2]);
-        request.addProperty("nroPuesto", strings[3]);
-        //Log.i("----- TASK MAX MIN FECHA","----");
-      //  Log.i("accion", strings[0]);
-        //Log.i("TipoFecha", strings[1]);
-        //Log.i("codSocio", strings[2]);
-        //Log.i("nroPuesto", strings[3]);
+        request.addProperty("codSocio", strings[1]);
+        request.addProperty("nroPuesto", strings[2]);
+
 
 
         SoapSerializationEnvelope envelope =  new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -60,7 +55,7 @@ public class GetMaxMinFechaPTask extends AsyncTask<String,String,String> {
         {
             result = "";
         }
-        Log.i("retur value InsertPago Task => ", result);
+        Log.i(" Seccion RESULT Task => ", result);
         return result;
     }
 }

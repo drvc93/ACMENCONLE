@@ -34,7 +34,8 @@
         <activity android:name=".MenuModPago" />
         <activity android:name=".FormularioPago" />
         <activity android:name=".ListaBancos" />
-        <activity android:name=".ReportePagoEfec"></activity>
+        <activity android:name=".ReportePagoEfec" />
+        <activity android:name=".RepPagoConsolid"></activity>
     </application>
 
 </manifest>

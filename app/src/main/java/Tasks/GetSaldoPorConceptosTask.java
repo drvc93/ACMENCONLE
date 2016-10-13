@@ -31,6 +31,7 @@ public class GetSaldoPorConceptosTask extends AsyncTask<String,String,ArrayList<
         SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
         request.addProperty("accion", strings[0]);
         request.addProperty("codSocio", strings[1]);
+        request.addProperty("nroPuesto", strings[2]);
 
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         envelope.dotNet = true;
@@ -50,6 +51,9 @@ public class GetSaldoPorConceptosTask extends AsyncTask<String,String,ArrayList<
                 c.setCodConcepto( ic.getProperty(0).toString() );
                 c.setSaldoxConcepto(ic.getProperty(1).toString());
                 c.setPagadoxConceto(ic.getProperty(2).toString());
+                if (c.getSaldoxConcepto().equals("anyType{}")){
+                    c.setSaldoxConcepto("0");
+                }
 
 
 

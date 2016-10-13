@@ -13,6 +13,7 @@ public class MenuModPago extends AppCompatActivity {
 
     Button btnFormPago , btnReportPago;
     int REP_PAGOS_EFECTUADOS = 0;
+    int REP_PAGOS_CONSOLIDAD = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class MenuModPago extends AppCompatActivity {
     public void SelecTipoReporte() {
 
 
-        final CharSequence[] items = { "Reporte de pagos efectuados" };
+        final CharSequence[] items = { "Reporte de pagos Efectuados","Reporte de pagos Consolidado" };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MenuModPago.this);
         builder.setTitle("SELECCIONE TIPO DE REPORTE");
@@ -65,6 +66,13 @@ public class MenuModPago extends AppCompatActivity {
 
             Intent  intent = new Intent(MenuModPago.this , ReportePagoEfec.class);
             startActivity(intent);
+        }
+
+        else  if (Rep == REP_PAGOS_CONSOLIDAD){
+
+            Intent intent = new Intent(MenuModPago.this,RepPagoConsolid.class);
+            startActivity(intent);
+
         }
 
     }

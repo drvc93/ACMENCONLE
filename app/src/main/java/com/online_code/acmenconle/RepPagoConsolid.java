@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -15,9 +16,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
+import Model.DetalleSaldo;
 import Model.SaldoConcepto;
+import Tasks.GetDetalleSaldoTask;
 import Tasks.GetSaldoPorConceptosTask;
 import Tasks.GetSeccionFromSocioTask;
+import Utils.RepPagoConsAdapter;
 
 public class RepPagoConsolid extends AppCompatActivity {
 
@@ -26,6 +30,7 @@ public class RepPagoConsolid extends AppCompatActivity {
     TextView lblSVigilancia ,lblSAgua ,  lblServicios, lblTotal;
     SharedPreferences preferences;
     String nroPuesto , codSocio,nombreLargo;
+    ListView LVRepPConsolidado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +50,7 @@ public class RepPagoConsolid extends AppCompatActivity {
         lblSAgua = (TextView)findViewById(R.id.lblRCAgua);
         lblServicios = (TextView)findViewById(R.id.lblRCServicios);
         lblTotal  = (TextView)findViewById(R.id.lblRCTotal);
+        LVRepPConsolidado = (ListView) findViewById(R.id.lvRepPagoConsold);
 
      /* FIN*/
 
@@ -54,6 +60,7 @@ public class RepPagoConsolid extends AppCompatActivity {
         lblSeccion.setText(GetSeccion());
         lblTextSaldoD.setText("Saldo deudor hasta la fecha  " + ObtenerFechaHoy() );
         GetCabeceraSaldos();
+        GetDetalleS();
         /* FIN*/
 
     }
@@ -130,6 +137,33 @@ public class RepPagoConsolid extends AppCompatActivity {
             }
 
             lblTotal.setText("TOTAL ............................ "+ String.format("%.2f",saldoT));
+
+        }
+
+
+    }
+
+    public  void  GetDetalleS (){
+        ArrayList<DetalleSaldo> detalles   = null ;
+        AsyncTask<String,String,ArrayList<DetalleSaldo>>asyncTaskDetalles ;
+        GetDetalleSaldoTask getDetalleSaldoTask   = new GetDetalleSaldoTask();
+
+
+
+        try {
+            asyncTaskDetalles = getDetalleSaldoTask.execute("1",codSocio,nroPuesto);
+            detalles = (ArrayList<DetalleSaldo>)asyncTaskDetalles.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        if (detalles!=null){
+
+            RepPagoConsAdapter adapter = new RepPagoConsAdapter(RepPagoConsolid.this,R.layout.lv_detalle_pago_consolidad,detalles);
+            LVRepPConsolidado.setAdapter(adapter);
+
 
         }
 

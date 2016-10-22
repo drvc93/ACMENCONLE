@@ -20,28 +20,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <WebView
+                android:layout_width="fill_parent"
+                android:layout_height="450dp"
+                android:id="@+id/webUbicacion" />
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#89e9e8e8">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Trujillo – Perú Av. Condorcanqui Km. 555 Horario de atención: De 6 a.m. a 6 p.m. "
-                    android:id="@+id/textView3"
-                    android:textAlignment="center"
-                    android:textColor="#040404"
-                    android:layout_marginBottom="5dp"
-                    android:textSize="18dp" />
+                    android:id="@+id/imageView3"
+                    android:src="@drawable/img_mercado_ref"
+                    android:layout_marginTop="15dp" />
             </LinearLayout>
-
-            <WebView
-                android:layout_width="fill_parent"
-                android:layout_height="350dp"
-                android:id="@+id/webUbicacion" />
 
         </LinearLayout>
     </ScrollView>
+
 </RelativeLayout>

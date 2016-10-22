@@ -22,7 +22,7 @@ import Utils.Constantes;
 public class MenuPrincipal extends AppCompatActivity {
     SharedPreferences preferences;
     String username ,nropuesto  ;
-    Button btnModUsuarios , btnModPagos,  btnModEcnuesta,btnModEvento ;
+    Button btnModUsuarios , btnModPagos,btnMasInfo,  btnModEcnuesta,btnModEvento ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +30,7 @@ public class MenuPrincipal extends AppCompatActivity {
         setTitle("Menú Principal");
         btnModUsuarios = (Button)findViewById(R.id.btnModUsuarios);
         btnModPagos = (Button) findViewById(R.id.btnModPagos);
+        btnMasInfo = (Button) findViewById(R.id.btnMasInfo);
 
 
         preferences = PreferenceManager.getDefaultSharedPreferences(MenuPrincipal.this);
@@ -54,6 +55,14 @@ public class MenuPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MenuPrincipal.this,MenuModPago.class);
+                startActivity(intent);
+            }
+        });
+
+        btnMasInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent( MenuPrincipal.this, MasInfo.class);
                 startActivity(intent);
             }
         });

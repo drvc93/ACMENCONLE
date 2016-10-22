@@ -45,7 +45,7 @@ public class MenuModPago extends AppCompatActivity {
     public void SelecTipoReporte() {
 
 
-        final CharSequence[] items = { "Reporte de pagos Efectuados","Reporte de pagos Consolidado" };
+        final CharSequence[] items = { "MIS PAGOS EFECTUADOS","MI ESTADO DE DEUDAS" };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MenuModPago.this);
         builder.setTitle("SELECCIONE TIPO DE REPORTE");

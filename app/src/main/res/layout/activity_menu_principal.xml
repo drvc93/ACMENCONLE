@@ -23,12 +23,24 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:text="Módulo informacion"
+                android:drawableLeft="@drawable/icn_informacion"
+                android:id="@+id/btnMasInfo"
+                android:background="@drawable/boton_silver"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:text="Módulo Usuarios"
                 android:drawableLeft="@drawable/icn_user_48"
                 android:id="@+id/btnModUsuarios"
                 android:background="@drawable/boton_silver"
                 android:textStyle="bold"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:layout_marginTop="10dp" />
 
             <Button
                 android:layout_width="fill_parent"
@@ -55,9 +67,20 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Eventos"
+                android:text="Calendario de Eventos"
                 android:drawableLeft="@drawable/icn_event"
                 android:id="@+id/btnModEventos"
+                android:background="@drawable/boton_silver"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Galeia de fotos"
+                android:drawableLeft="@drawable/icn_gallery"
+                android:id="@+id/brnGaleria"
                 android:background="@drawable/boton_silver"
                 android:textStyle="bold"
                 android:textSize="20dp"

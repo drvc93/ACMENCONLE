@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/blue_clear_bg">
+    android:background="@drawable/img_pago_bg">
 
     <FrameLayout
         android:layout_width="fill_parent"
@@ -24,12 +24,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#75c8caca"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="40dp">
 
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:id="@+id/layoutpagoBBVA">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -62,14 +63,6 @@
 
                     </LinearLayout>
 
-                    <Button
-                        android:layout_width="fill_parent"
-                        android:layout_height="50dp"
-                        android:text="Realizar Pago desde aquí"
-                        android:id="@+id/btnBBVA"
-                        android:drawableLeft="@drawable/icn_pay_next"
-                        android:background="@drawable/boton_silver"
-                        android:layout_marginTop="2dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -77,12 +70,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#75c8caca"
-                    android:layout_marginTop="10dp" >
+                    android:layout_marginTop="20dp" >
 
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
+                        android:layout_height="match_parent"
+                        android:id="@+id/layoutpagoBCP">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -116,14 +110,6 @@
                         </LinearLayout>
                     </LinearLayout>
 
-                    <Button
-                        android:layout_width="fill_parent"
-                        android:layout_height="50dp"
-                        android:text="Realizar Pago desde aquí"
-                        android:id="@+id/btnBCP"
-                        android:drawableLeft="@drawable/icn_pay_next"
-                        android:background="@drawable/boton_silver"
-                        android:layout_marginTop="2dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -131,12 +117,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#75c8caca"
-                    android:layout_marginTop="10dp" >
+                    android:layout_marginTop="20dp" >
 
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
+                        android:layout_height="match_parent"
+                        android:id="@+id/layoutpagoINTBK">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -169,14 +156,6 @@
                         </LinearLayout>
                     </LinearLayout>
 
-                    <Button
-                        android:layout_width="fill_parent"
-                        android:layout_height="50dp"
-                        android:text="Realizar Pago desde aquí"
-                        android:id="@+id/btnINTBK"
-                        android:drawableLeft="@drawable/icn_pay_next"
-                        android:background="@drawable/boton_silver"
-                        android:layout_marginTop="2dp" />
                 </LinearLayout>
 
             </LinearLayout>

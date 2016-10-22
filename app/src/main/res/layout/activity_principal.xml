@@ -29,31 +29,42 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imageView"
                     android:src="@drawable/mercado_img_512" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="MERCADO ACMENCONLE"
+                        android:id="@+id/textView2"
+                        android:textStyle="normal|bold|italic"
+                        android:textSize="28dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Asociación de Comerciantes Mercado Mayorista del Cono Norte de La  Esperanza"
+                        android:id="@+id/textView33"
+                        android:textStyle="normal|bold|italic"
+                        android:textAlignment="center"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="MERCADO"
-                    android:id="@+id/textView"
-                    android:textStyle="normal|bold|italic" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="ACMENCONLE"
-                    android:id="@+id/textView2"
-                    android:textStyle="normal|bold|italic"
-                    android:textSize="28dp" />
-            </LinearLayout>
         </LinearLayout>
 
     </FrameLayout>
@@ -61,34 +72,80 @@
     <LinearLayout
         android:id="@+id/buttonBar"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="85dp"
         android:layout_alignParentBottom="true"
         style="@android:style/ButtonBar"
         android:gravity="center"
         android:background="#e9fcfafa">
 
-        <ImageView
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgHome"
+                android:src="@drawable/icn_home_64"
+
+                android:layout_marginRight="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Nuestro Mercado"
+                android:id="@+id/textView30"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imgHome"
-            android:src="@drawable/icn_home_64"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_horizontal">
 
-            android:layout_marginRight="30dp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgUbicacion"
+                android:src="@drawable/icn_gps_64"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imgUbicacion"
-            android:src="@drawable/icn_gps_64"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Ubicacion"
+                android:id="@+id/textView31"
+                android:textColor="#000000" />
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imgSocios"
-            android:src="@drawable/icn_clients_64"
-            android:layout_marginLeft="30dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgSocios"
+                android:src="@drawable/icn_clients_64"
+                android:layout_marginLeft="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Area Socios"
+                android:id="@+id/textView32"
+                android:layout_gravity="right"
+                android:textColor="#000000" />
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

@@ -24,6 +24,7 @@ import java.util.concurrent.ExecutionException;
 
 import Model.Usuario;
 import Tasks.AutenticarTask;
+import Tasks.ComprobarDeudaTask;
 import Tasks.GetPuestosSocioTask;
 import Utils.Constantes;
 
@@ -47,11 +48,7 @@ public class Login extends AppCompatActivity {
         btnEntrar = (Button) findViewById(R.id.btnLogin);
         preferences = PreferenceManager.getDefaultSharedPreferences(Login.this);
         dniSocio = preferences.getString("UserDni",null);
-        if (dniSocio!=null && dniSocio.length()>6){
-            Intent intent = new Intent(Login.this , MenuPrincipal.class);
-            startActivity(intent);
 
-        }
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +80,7 @@ public class Login extends AppCompatActivity {
  *
  * No XML needed.
  */
-    public void SelecPuesto(String dni) {
+    public void SelecPuesto(final Usuario usuario) {
 
         ArrayList<String> listString = null;
         CharSequence[] items = null ;
@@ -91,7 +88,7 @@ public class Login extends AppCompatActivity {
         GetPuestosSocioTask getPuestosSocioTask=  new GetPuestosSocioTask();
 
         try {
-            asyncTaskPuesto = getPuestosSocioTask.execute("5", dni);
+            asyncTaskPuesto = getPuestosSocioTask.execute("5", usuario.getDni());
             listString = (ArrayList<String>) asyncTaskPuesto.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -116,7 +113,7 @@ public class Login extends AppCompatActivity {
 
                     // will toast your selection
                    // Toast.makeText(Login.this, finalItems[item], Toast.LENGTH_SHORT).show(); //showToast("Name: " + items[item]);
-                   GoMainActivity( String.valueOf(finalItems[item]));
+                   GoMainActivity( String.valueOf(finalItems[item]), usuario);
                     dialog.dismiss();
 
                 }
@@ -125,15 +122,68 @@ public class Login extends AppCompatActivity {
     }
 
 
-     public void GoMainActivity (String nroPuesto){
+     public void GoMainActivity (String nroPuesto , Usuario us){
 
          SharedPreferences.Editor editor = preferences.edit();
          editor.putString("nroPuesto", nroPuesto);
          editor.commit();
-         Intent intent = new Intent(Login.this , MenuPrincipal.class);
-         startActivity(intent);
+         AsyncTask<String,String,String>  asyncDeuda ;
+         ComprobarDeudaTask comprobarDeudaTask = new ComprobarDeudaTask();
+         String result  = "";
 
+
+         try {
+             asyncDeuda = comprobarDeudaTask.execute("3" ,us.getCodigo(), nroPuesto);
+             result =  (String) asyncDeuda.get();
+         } catch (InterruptedException e) {
+             e.printStackTrace();
+         } catch (ExecutionException e) {
+             e.printStackTrace();
+         }
+
+          if (result.equals("Error") ){
+
+              CreateCustomToast("No se pudo comprobar el estado de deudas del socio.",Constantes.icon_error,Constantes.layout_error);
+
+          }
+          else if (result.equals("")){
+
+              Intent intent = new Intent(Login.this, MenuPrincipal.class);
+              startActivity(intent);
+          }
+          else  if (Double.valueOf(result)>0){
+                AlerDeuda();
+
+          }
+
+
+         else {
+              Intent intent = new Intent(Login.this, MenuPrincipal.class);
+              startActivity(intent);
+          }
      }
+
+    public void AlerDeuda() {
+        new AlertDialog.Builder(Login.this)
+                .setTitle("Alerta de deuda pendiente")
+                .setMessage("Se ha restringido el acceso a  la zona socios por motivos de deuda , desea contactarnos con nosotros?")
+                .setIcon(R.drawable.icn_alert)
+                .setPositiveButton("SI",
+                        new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int id) {
+                                //showToast("Thank you! You're awesome too!");
+                                dialog.cancel();
+                            }
+                        })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+                    }
+                }).show();
+    }
 
 
     public  void  AutenticarUsuario () throws ExecutionException, InterruptedException {
@@ -152,7 +202,9 @@ public class Login extends AppCompatActivity {
             editor.putString("UserName",user.getNombres());
             editor.putString("UserNombreLargo",user.getNombres() + " " + user.getApellidoPat()+ " " + user.getApellidoMat());
             editor.commit();
-            SelecPuesto(user.getDni());
+
+
+            SelecPuesto(user);
            //ntent intent = new Intent(Login.this , MenuPrincipal.class);
            //zartActivity(intent);
            // CreateCustomToast("Bienvenido " + user.getNombres(), Constantes.icon_succes,Constantes.layout_success);

@@ -8,37 +8,41 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class ListaBancos extends AppCompatActivity {
 
-    Button btnBCP,btnBBVA,btnINTBK;
+
     String VIGILANCIA = "1" ,TRABAJOS = "2" , OTROS = "3";
     String BCP = "1" ,BBVA = "2", INTBK ="3";
+    LinearLayout  lyBBVA , lyBCP,lyINTBK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_bancos);
         setTitle("Realizar pago");
-        btnBCP = (Button) findViewById(R.id.btnBCP);
-        btnBBVA = (Button) findViewById(R.id.btnBBVA);
-        btnINTBK  = (Button) findViewById(R.id.btnINTBK);
 
-        btnBBVA.setOnClickListener(new View.OnClickListener() {
+        lyBBVA = (LinearLayout)findViewById(R.id.layoutpagoBBVA);
+        lyBCP = (LinearLayout) findViewById(R.id.layoutpagoBCP);
+        lyINTBK = (LinearLayout)findViewById(R.id.layoutpagoINTBK);
+
+
+        lyBBVA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 GoAcitivityPago(BCP,VIGILANCIA);
             }
         });
 
-        btnBCP.setOnClickListener(new View.OnClickListener() {
+        lyBCP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 GoAcitivityPago(BBVA,TRABAJOS);
             }
         });
 
-        btnINTBK.setOnClickListener(new View.OnClickListener() {
+        lyINTBK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 GoAcitivityPago(INTBK,OTROS);

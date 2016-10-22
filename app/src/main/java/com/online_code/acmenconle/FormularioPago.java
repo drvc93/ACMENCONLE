@@ -52,7 +52,7 @@ public class FormularioPago extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_pago);
-        setTitle("Formulario de pago");
+        setTitle("Formulario de reporte de pago");
         preferences = PreferenceManager.getDefaultSharedPreferences(FormularioPago.this);
         dniSocio = preferences.getString("UserDni",null);
         codSocio = preferences.getString("CodSocio",null);

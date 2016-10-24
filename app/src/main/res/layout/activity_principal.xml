@@ -40,7 +40,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="MERCADO ACMENCONLE"
+                        android:text="MERCADO ACMEMCONLE"
                         android:id="@+id/textView2"
                         android:textStyle="normal|bold|italic"
                         android:textSize="28dp" />
@@ -84,6 +84,14 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Nuestro Mercado"
+                android:id="@+id/textView30"
+                android:textColor="#000000" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,13 +100,6 @@
 
                 android:layout_marginRight="30dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Nuestro Mercado"
-                android:id="@+id/textView30"
-                android:textColor="#000000" />
         </LinearLayout>
 
         <LinearLayout
@@ -108,6 +109,14 @@
             android:layout_gravity="center_vertical"
             android:gravity="center_horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Ubicacion"
+                android:id="@+id/textView31"
+                android:textColor="#000000" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -116,26 +125,12 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Ubicacion"
-                android:id="@+id/textView31"
-                android:textColor="#000000" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imgSocios"
-                android:src="@drawable/icn_clients_64"
-                android:layout_marginLeft="30dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -145,6 +140,14 @@
                 android:id="@+id/textView32"
                 android:layout_gravity="right"
                 android:textColor="#000000" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgSocios"
+                android:src="@drawable/icn_clients_64"
+                android:layout_marginLeft="30dp" />
+
         </LinearLayout>
     </LinearLayout>
 

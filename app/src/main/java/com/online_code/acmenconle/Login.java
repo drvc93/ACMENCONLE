@@ -173,7 +173,8 @@ public class Login extends AppCompatActivity {
 
                             public void onClick(DialogInterface dialog, int id) {
                                 //showToast("Thank you! You're awesome too!");
-                                dialog.cancel();
+                                Intent  intent = new Intent(Login.this,Contacto.class);
+                                startActivity(intent);
                             }
                         })
                 .setNegativeButton("NO", new DialogInterface.OnClickListener() {

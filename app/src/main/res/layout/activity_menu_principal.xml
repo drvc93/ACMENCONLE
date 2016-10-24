@@ -78,7 +78,7 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Galeia de fotos"
+                android:text="Galeria de fotos"
                 android:drawableLeft="@drawable/icn_gallery"
                 android:id="@+id/brnGaleria"
                 android:background="@drawable/boton_silver"

@@ -37,7 +37,8 @@
         <activity android:name=".ReportePagoEfec" />
         <activity android:name=".RepPagoConsolid" />
         <activity android:name=".MasInfo" />
-        <activity android:name=".Contacto"></activity>
+        <activity android:name=".Contacto" />
+        <activity android:name=".ListaEventos"></activity>
     </application>
 
 </manifest>

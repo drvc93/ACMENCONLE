@@ -148,11 +148,17 @@ public class FormularioPago extends AppCompatActivity {
          }
 
 
-         if (res.equals("OK") ){
+         if (res.equals("OK") ) {
 
-             CreateCustomToast("Se envio la información correctamente  , en el transcurso del día se confirmara el pago", Constantes.icon_succes,Constantes.layout_success);
+             CreateCustomToast("Se envio la información correctamente  , en el transcurso del día se confirmara el pago", Constantes.icon_succes, Constantes.layout_success);
              super.onBackPressed();
 
+         }
+
+         else if  (res.equals("PAGADO")){
+
+             CreateCustomToast("El pago de este mes por el concepto seleccionado ya fue realizado",Constantes.icon_error,Constantes.layout_error);
+             super.onBackPressed();
          }
 
      }

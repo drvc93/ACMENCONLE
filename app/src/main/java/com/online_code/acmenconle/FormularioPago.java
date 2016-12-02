@@ -161,6 +161,12 @@ public class FormularioPago extends AppCompatActivity {
              super.onBackPressed();
          }
 
+         else if  (res.equals("FECHA")){
+
+             CreateCustomToast("La fecha de pago es posterior a la fecha actual , verificar por favor",Constantes.icon_error,Constantes.layout_error);
+             super.onBackPressed();
+         }
+
      }
 
 

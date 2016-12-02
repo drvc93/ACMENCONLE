@@ -31,14 +31,14 @@ public class ListaBancos extends AppCompatActivity {
         lyBBVA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GoAcitivityPago(BCP,VIGILANCIA);
+                GoAcitivityPago(BBVA,VIGILANCIA);
             }
         });
 
         lyBCP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GoAcitivityPago(BBVA,TRABAJOS);
+                GoAcitivityPago(BCP,TRABAJOS);
             }
         });
 

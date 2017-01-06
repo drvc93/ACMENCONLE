@@ -1,8 +1,11 @@
 package com.online_code.acmenconle;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,7 +25,7 @@ import Utils.Constantes;
 public class MenuPrincipal extends AppCompatActivity {
     SharedPreferences preferences;
     String username ,nropuesto  ;
-    Button btnModUsuarios , btnModPagos,btnMasInfo,  btnModEcnuesta,btnModEvento ;
+    Button btnModUsuarios , btnModPagos,btnMasInfo,  btnModEcnuesta,btnModEvento, btnGaleria ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,7 @@ public class MenuPrincipal extends AppCompatActivity {
         btnModUsuarios = (Button)findViewById(R.id.btnModUsuarios);
         btnModPagos = (Button) findViewById(R.id.btnModPagos);
         btnMasInfo = (Button) findViewById(R.id.btnMasInfo);
+        btnGaleria = (Button)findViewById(R.id.brnGaleria);
 
 
         preferences = PreferenceManager.getDefaultSharedPreferences(MenuPrincipal.this);
@@ -66,6 +70,13 @@ public class MenuPrincipal extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnGaleria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SelecExplorer();
+            }
+        });
     }
 
     @Override
@@ -90,6 +101,42 @@ public class MenuPrincipal extends AppCompatActivity {
         }
 
         return true;
+    }
+
+
+
+    public void SelecExplorer() {
+
+    /*
+     * WebView is created programatically here.
+     *
+     * @Here are the list of items to be shown in the list
+     */
+        final CharSequence[] items = { "Ver en App", "Ver en explorador" };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MenuPrincipal.this);
+        builder.setTitle("Make your selection");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+             if (item == 0) {
+                 Intent i = new Intent(MenuPrincipal.this , Galeria.class);
+                 startActivity(i);
+
+
+             }
+
+              else {
+
+                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://acmenconle.com/Imgs.aspx"));
+                 startActivity(browserIntent);
+
+             }
+                // will toast your selection
+               // showToast("Name: " + items[item]);
+               // dialog.dismiss();
+
+            }
+        }).show();
     }
 
 

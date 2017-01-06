@@ -38,7 +38,8 @@
         <activity android:name=".RepPagoConsolid" />
         <activity android:name=".MasInfo" />
         <activity android:name=".Contacto" />
-        <activity android:name=".ListaEventos"></activity>
+        <activity android:name=".ListaEventos" />
+        <activity android:name=".Galeria"></activity>
     </application>
 
 </manifest>

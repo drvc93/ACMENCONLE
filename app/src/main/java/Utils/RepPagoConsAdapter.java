@@ -77,6 +77,12 @@ public class RepPagoConsAdapter extends ArrayAdapter<DetalleSaldo> {
 
          }
 
+         else  if (det.getEstado().equals("3")){
+             viewHolder.ParentLayout.setBackgroundResource(R.drawable.detalle_pendiente_layout);
+             viewHolder.lblEstado.setText("Pendiente");
+
+         }
+
         viewHolder.lblMonto.setText(det.getMonto());
         viewHolder.lblMes.setText(det.getMes() +"-"+det.getAnio());
 

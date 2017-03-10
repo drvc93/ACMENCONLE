@@ -27,7 +27,7 @@ public class RepPagoConsolid extends AppCompatActivity {
 
     TextView lblRCCabNombresSoc ,lblNroPues ,lblSeccion;
     TextView lblTextSaldoD;
-    TextView lblSVigilancia ,lblSAgua ,  lblServicios, lblTotal;
+    TextView lblSVigilancia ,lblSAgua ,  lblServicios, lblTotal, lbLOtrasDeudas;
     SharedPreferences preferences;
     String nroPuesto , codSocio,nombreLargo;
     ListView LVRepPConsolidado;
@@ -50,6 +50,7 @@ public class RepPagoConsolid extends AppCompatActivity {
         lblSAgua = (TextView)findViewById(R.id.lblRCAgua);
         lblServicios = (TextView)findViewById(R.id.lblRCServicios);
         lblTotal  = (TextView)findViewById(R.id.lblRCTotal);
+        lbLOtrasDeudas = (TextView)findViewById(R.id.lblOtrasDeudas);
         LVRepPConsolidado = (ListView) findViewById(R.id.lvRepPagoConsold);
 
      /* FIN*/
@@ -130,6 +131,11 @@ public class RepPagoConsolid extends AppCompatActivity {
                 else  if ( s.getCodConcepto().equals("3") ){
 
                     lblServicios.setText("Cuota servicios................... "+ s.getSaldoxConcepto());
+                }
+
+                else  if ( s.getCodConcepto().equals("4") ){
+
+                    lbLOtrasDeudas.setText("Deudas Ant.................... "+ s.getSaldoxConcepto());
                 }
 
                 saldoT = saldoT + Double.valueOf(s.getSaldoxConcepto());

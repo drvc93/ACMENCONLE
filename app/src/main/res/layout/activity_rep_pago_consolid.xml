@@ -146,6 +146,17 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Cuota servicios..................."
+                    android:id="@+id/lblOtrasDeudas"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="TOTAL ............................"
                     android:id="@+id/lblRCTotal"
                     android:textColor="#b6001e"

@@ -35,6 +35,7 @@ public class MenuPrincipal extends AppCompatActivity {
         btnModPagos = (Button) findViewById(R.id.btnModPagos);
         btnMasInfo = (Button) findViewById(R.id.btnMasInfo);
         btnGaleria = (Button)findViewById(R.id.brnGaleria);
+        btnModEvento = (Button) findViewById(R.id.btnModEventos);
 
 
         preferences = PreferenceManager.getDefaultSharedPreferences(MenuPrincipal.this);
@@ -77,6 +78,16 @@ public class MenuPrincipal extends AppCompatActivity {
                 SelecExplorer();
             }
         });
+
+        btnModEvento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent  = new Intent(MenuPrincipal.this , ListaEventos.class);
+                startActivity(intent);
+            }
+
+            });
     }
 
     @Override

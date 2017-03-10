@@ -158,6 +158,51 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#75c8caca"
+                    android:layout_marginTop="20dp" >
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/layoutpagoDeudas" >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imageView7"
+                            android:src="@drawable/deuda_icn_60x60" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/boton_silver" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PAGO POR DEUDAS ANTERIORES"
+                                android:id="@+id/textView29"
+                                android:layout_gravity="center_horizontal"
+                                android:textStyle="bold"
+                                android:textColor="#000000" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="CTA. Nº  23-7678-333-87"
+                                android:id="@+id/textView37"
+                                android:layout_gravity="center_horizontal"
+                                android:textColor="#1c1c1c" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
             </LinearLayout>
         </ScrollView>
 

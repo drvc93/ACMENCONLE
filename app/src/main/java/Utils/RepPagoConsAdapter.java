@@ -101,6 +101,11 @@ public class RepPagoConsAdapter extends ArrayAdapter<DetalleSaldo> {
             viewHolder.lblConcepto.setText("SERVICIOS");
         }
 
+        else  if (det.getCodConcepto().equals("4")){
+
+            viewHolder.lblConcepto.setText("DEUDAS ANT.");
+        }
+
         return  convertView;
     }
 }

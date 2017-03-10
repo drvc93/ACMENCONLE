@@ -151,10 +151,10 @@ public class Login extends AppCompatActivity {
               Intent intent = new Intent(Login.this, MenuPrincipal.class);
               startActivity(intent);
           }
-          else  if (Double.valueOf(result)>0){
-                AlerDeuda();
+        //  else  if (Double.valueOf(result)>0){
+          //      AlerDeuda();
 
-          }
+         // }
 
 
          else {

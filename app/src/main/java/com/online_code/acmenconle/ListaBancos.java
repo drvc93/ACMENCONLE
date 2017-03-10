@@ -13,9 +13,9 @@ import android.widget.LinearLayout;
 public class ListaBancos extends AppCompatActivity {
 
 
-    String VIGILANCIA = "1" ,TRABAJOS = "2" , OTROS = "3";
+    String VIGILANCIA = "1" ,TRABAJOS = "2" , OTROS = "3" ,DEUDAS ="4";
     String BCP = "1" ,BBVA = "2", INTBK ="3";
-    LinearLayout  lyBBVA , lyBCP,lyINTBK;
+    LinearLayout  lyBBVA , lyBCP,lyINTBK , lyDeudas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class ListaBancos extends AppCompatActivity {
         lyBBVA = (LinearLayout)findViewById(R.id.layoutpagoBBVA);
         lyBCP = (LinearLayout) findViewById(R.id.layoutpagoBCP);
         lyINTBK = (LinearLayout)findViewById(R.id.layoutpagoINTBK);
-
+        lyDeudas = (LinearLayout)findViewById(R.id.layoutpagoDeudas);
 
         lyBBVA.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +46,12 @@ public class ListaBancos extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 GoAcitivityPago(INTBK,OTROS);
+            }
+        });
+        lyDeudas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GoAcitivityPago(BCP,DEUDAS);
             }
         });
 

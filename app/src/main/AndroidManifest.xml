@@ -39,7 +39,8 @@
         <activity android:name=".MasInfo" />
         <activity android:name=".Contacto" />
         <activity android:name=".ListaEventos" />
-        <activity android:name=".Galeria"></activity>
+        <activity android:name=".Galeria" />
+        <activity android:name=".ListaEncuestas"></activity>
     </application>
 
 </manifest>

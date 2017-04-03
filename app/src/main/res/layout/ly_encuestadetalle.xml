@@ -26,16 +26,16 @@
                 android:layout_marginTop="5dp">
 
                 <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
                     android:id="@+id/spPregunta"
-                    android:spinnerMode="dialog"
-                    android:background="@drawable/spiner_style" />
+                    android:layout_width="100dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/spiner_style"
+                    android:spinnerMode="dialog" />
 
                 <RatingBar
+                    android:id="@+id/rtnPregunta"
                     android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:id="@+id/rtnPregunta" />
+                    android:layout_height="35dp" />
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>

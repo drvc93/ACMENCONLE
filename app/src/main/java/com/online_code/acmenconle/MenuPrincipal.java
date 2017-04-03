@@ -36,6 +36,7 @@ public class MenuPrincipal extends AppCompatActivity {
         btnMasInfo = (Button) findViewById(R.id.btnMasInfo);
         btnGaleria = (Button)findViewById(R.id.brnGaleria);
         btnModEvento = (Button) findViewById(R.id.btnModEventos);
+        btnModEcnuesta = (Button)findViewById(R.id.btnModEncuesta);
 
 
         preferences = PreferenceManager.getDefaultSharedPreferences(MenuPrincipal.this);
@@ -88,6 +89,14 @@ public class MenuPrincipal extends AppCompatActivity {
             }
 
             });
+
+        btnModEcnuesta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent  = new Intent(MenuPrincipal.this ,ListaEncuestas.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -40,7 +40,8 @@
         <activity android:name=".Contacto" />
         <activity android:name=".ListaEventos" />
         <activity android:name=".Galeria" />
-        <activity android:name=".ListaEncuestas"></activity>
+        <activity android:name=".ListaEncuestas" />
+        <activity android:name=".EncuestaDetalle"></activity>
     </application>
 
 </manifest>

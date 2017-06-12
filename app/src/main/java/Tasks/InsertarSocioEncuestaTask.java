@@ -12,30 +12,26 @@ import org.ksoap2.transport.HttpTransportSE;
 import Utils.Constantes;
 
 /**
- * Created by drvc_ on 26/09/2016.
+ * Created by PC on 12/06/2017.
  */
-public class RegistrarPagoTask extends AsyncTask<String,String,String> {
+
+public class InsertarSocioEncuestaTask extends AsyncTask<String,String,String> {
     @Override
-    protected String doInBackground(String... strings)
-    {
+    protected String doInBackground(String... strings) {
         String result ="";
         // String urlserver = params[2];
         final String NAMESPACE = Constantes.UrlWS;
         final String URL=NAMESPACE+Constantes.NameSpaceWS;
-        final String METHOD_NAME = "InsertPago";
+        final String METHOD_NAME = "InsertSocioPregunta";
         final String SOAP_ACTION = NAMESPACE+METHOD_NAME;
 
         SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 
-        request.addProperty("accion", strings[0]);
-        request.addProperty("codSocio", strings[1]);
-        request.addProperty("codConcepto", strings[2]);
-        request.addProperty("nroOpe", strings[3]);
-        request.addProperty("codBanco", strings[4]);
-        request.addProperty("observacion", strings[5]);
-        request.addProperty("monto", strings[6] );
-        request.addProperty("codPuesto", strings[7]);
-        request.addProperty("fechaPago", strings[8]);
+        request.addProperty("codEncuesta", strings[0]);
+        request.addProperty("Orden", strings[1]);
+        request.addProperty("codSocio", strings[2]);
+        request.addProperty("valor", strings[3]);
+
 
 
 
@@ -62,7 +58,7 @@ public class RegistrarPagoTask extends AsyncTask<String,String,String> {
         {
             result = "";
         }
-        Log.i("retur value InsertPago Task => ", result);
+        Log.i("Result insert socio encuesta => ", result);
         return result;
     }
 }

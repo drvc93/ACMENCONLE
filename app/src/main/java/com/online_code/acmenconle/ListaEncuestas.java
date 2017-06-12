@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,6 +22,8 @@ public class ListaEncuestas extends AppCompatActivity {
     SharedPreferences preferences;
     ListView lvEcnuestas;
     String codSocio;
+    ArrayList<SocioEncuesta> listEncuesta;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +41,10 @@ public class ListaEncuestas extends AppCompatActivity {
              @Override
              public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                  Intent  intent = new Intent(ListaEncuestas.this , EncuestaDetalle.class);
+                 String   codEncuesta  = "" ;
+                  codEncuesta = listEncuesta.get(i).getCodEncuesta();
+                 intent.putExtra("codEncuesta" , codEncuesta);
+                 Log.i("CodEncuesta" , codEncuesta);
                  startActivity(intent);
              }
          });
@@ -49,7 +56,7 @@ public class ListaEncuestas extends AppCompatActivity {
 
         AsyncTask<String ,String ,ArrayList<SocioEncuesta>> asyncTask;
         GetEncuestasTask  getEncuestasTask = new GetEncuestasTask();
-        ArrayList<SocioEncuesta> listEncuesta;
+
         listEncuesta = null;
 
 

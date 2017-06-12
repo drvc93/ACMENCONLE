@@ -7,9 +7,11 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
@@ -54,9 +56,9 @@ public class PreguntaAdapter extends ArrayAdapter<SocioPregunta> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        ViewHolder viewHolder ;
+        final ViewHolder viewHolder ;
         SocioPregunta p = data.get(position);
           String[] str={"SI","NO"};
 
@@ -73,6 +75,34 @@ public class PreguntaAdapter extends ArrayAdapter<SocioPregunta> {
             viewHolder.lblTitulo = (TextView) convertView.findViewById(R.id.lblPreguntaTxt);
             convertView.setTag(viewHolder);
 
+        viewHolder.rtnBarPregunta.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                data.get(position).setValor(String.valueOf(v));
+                Log.i("rating " + String.valueOf(position) ,  String.valueOf(v));
+            }
+        });
+
+            viewHolder.spPregunta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i == 0){
+
+                        data.get(position).setValor("SI");
+                    }
+                    {
+                        data.get(position).setValor("NO");
+                    }
+
+                    Log.i("Spiner " + String.valueOf(position) ,  String.valueOf(i));
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                    data.get(position).setValor("NO");
+                }
+            });
+
 
         }
 
@@ -81,7 +111,7 @@ public class PreguntaAdapter extends ArrayAdapter<SocioPregunta> {
 
         }
 
-        if (data.get(position).getTipo() == "RT")
+        if (data.get(position).getTipo().equals( "RT"))
         {
 
             viewHolder.Masterlayout.removeView(viewHolder.spPregunta);
@@ -101,5 +131,10 @@ public class PreguntaAdapter extends ArrayAdapter<SocioPregunta> {
 
 
         return  convertView;
+    }
+
+    public    ArrayList<SocioPregunta> getAlldata (){
+
+        return  data;
     }
 }
